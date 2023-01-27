@@ -2,34 +2,35 @@
             <a href="/blog/edit/new">new article</a>
     @endif
 
-    <div class="container">
-        <ul>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         @foreach ($posts as $post)
-            <div>
-                <h2>{{ $post->title }}</h2>
-                
-                <p>{{$post->created_at}}, {{$post->author->name}}</p>
+            <div class="col">
+                <div class="card shadow-sm">
+                    @if(isset($post->images[0]))
+                        <img class="bd-placeholder-img card-img-top" src='{{$post->images[0]->image_path}}'/>
+                    @endif
+                    <div class="card-body">
+                        <p class="card-text">{{ $post->title }}</p>
+                        <p class="card-text">{{ $post->title }}{{$post->summary}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                              <a type="button" class="btn btn-sm btn-outline-secondary" href="/blog/article/{{$post->id}}">View</a>
+                              @if(session()->has('user_id'))
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="/blog/edit/{{$post->id}}">Edit</a>
+                              @endif
+                            </div>
+                            <small class="text-muted">{{$post->created_at}}, {{$post->author->name}}</small>
+                        </div>
+                    </div>
 
-                <div>
-                    {{$post->summary}}
                 </div>
-                <a href="/blog/article/{{$post->id}}">read more...</a>
-
-                @if(session()->has('user_id'))
-                    <a href="/blog/edit/{{$post->id}}">edit</a>
-                @endif
-            </div>
-                
-            
-
+            </div> 
         @endforeach
-        </ul>
+    </div>
 
-        @if($posts->currentPage()!=$posts->onFirstPage())
-            <a href="{{$posts->previousPageUrl()}}">prev</a>
-        @endif
-        @if($posts->currentPage()!=$posts->lastPage())
-            <a href="{{$posts->nextPageUrl()}}">next</a>
-        @endif
+{{ $posts->links() }}
 
     </div>
+
+    
+</div>

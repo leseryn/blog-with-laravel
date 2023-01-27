@@ -15,7 +15,7 @@ class BlogListController extends Controller{
 					->where('published','=',1)
 					->orderBy('created_at', 'desc')
 
-					->paginate(5);
+					->cursorPaginate(5);
 		// dd($posts);
 		// Cache::store('redis')->put('posts', $posts, 600);
 		
