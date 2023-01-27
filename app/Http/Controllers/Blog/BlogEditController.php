@@ -82,6 +82,7 @@ class BlogEditController extends Controller{
 			'title' => $data['title'],
       		'summary' => $data['summary'],
       		'content' => $data['content'],
+      		'published'=>1,
 		];
 
 		// create new blog_post data
