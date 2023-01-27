@@ -11,6 +11,7 @@ $(window).scroll(function () {
             nextUrl = nextUrl[0].href;
             infinteLoadMore(nextUrl);
         }
+        $('nav[aria-label="Pagination Navigation"]').remove();
 
     }
 });
@@ -21,7 +22,7 @@ function infinteLoadMore(url) {
             type: "get",
             beforeSend: function () {
                 $('.auto-load').show();
-                $('nav[aria-label="Pagination Navigation"]').remove();
+                
             }
         })
         .done(function (response) {

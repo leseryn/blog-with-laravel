@@ -17,7 +17,7 @@
 		@include('blog.blogListContent')
 	
     </div>
-{{$posts->links()}}
+
 @endsection
 
 <div class="ajax-load" style="display:none">
