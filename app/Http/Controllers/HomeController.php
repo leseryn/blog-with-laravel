@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 class HomeController extends Controller{
 	function showIndex(Request  $request){
 
+		if(session()->has('user_id')){
+			return redirect()->to('/blog');
+		}
+
 		return view('/home/home',['message'=>$request->input('message')]);
 	}
 }

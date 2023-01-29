@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_comments', function (Blueprint $table) {
+        Schema::create('post_image', function (Blueprint $table) {
             $table->id();
             $table->integer('post_id');
-            $table->integer('user_id');
-            $table->string('comment')->nullable();
+            $table->string('image_path');
+            $table->string('filename');  
             $table->dateTime('created_at');
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_comments');
+        Schema::dropIfExists('post_image');
     }
 };

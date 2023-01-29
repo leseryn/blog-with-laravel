@@ -32,15 +32,21 @@ class BlogPost extends Model
 
     ];
 
-    protected $with = ['author','images'];
-    public function author()
-    {
+    protected $with = ['author','images', 'comments'];
+
+    
+    public function author(){
         return $this->belongsTo(User::class,'author_id');
     }
 
     public function images(){
         return $this->hasMany(PostImage::class, 'post_id');
     }
+
+    public function comments(){
+        return $this->hasMany(PostComment::class, 'post_id')->where('parent_id','=',null);
+    }
+
 
 
 }

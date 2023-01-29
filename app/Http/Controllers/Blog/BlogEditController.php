@@ -64,7 +64,7 @@ class BlogEditController extends Controller{
 		// return response()->json($request->all());
 		$data = $request->all();
 
-		##validation
+		// validation
 		$validator = Validator::make($data, [
 					'title' =>['required'],
 					'images' =>['nullable','max:4'],

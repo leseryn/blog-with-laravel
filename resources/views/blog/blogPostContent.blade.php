@@ -13,17 +13,16 @@
 
         <div>{{$post->content}}</div>
 
-        @if($post->images)
-            @foreach($post->images as $image)
+        @if(!empty($images))
+            @foreach($images as $image)
 
                 <img class="img-thumbnail" src='{{asset("{$image->image_path}")}}'/>
 
             @endforeach
         @endif
 
-   
-        
-        
-        
+         
+     
 
     </div>
+
