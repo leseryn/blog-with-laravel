@@ -1,5 +1,6 @@
 @extends('layout.main')
 
+
 @section('title')
 	BLOG!!
 @endsection
@@ -11,6 +12,6 @@
 
 	@include('blog.blogPostContent')
 	
-
+	@include('blog.blogComment')
 
 @endsection

@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+/*body {
+    background-color: #F4F4F4 !important
+}
+
+*/
+
+/*.card {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 40px
+}*/
+
+/*img {
+    border-radius: 10px;
+}*/
+
+img:hover {
+    cursor: pointer
+}
+
+
+
+
+.comment {
+    background: #F4F4F4;
+    border-radius: 0.5em;
+    position: relative;
+    border: none;
+    margin: 0.5em;
+    padding: 0.3em;
+}
+
+.comment-heading {
+    display: flex;
+    color: #888;
+    align-items: center;
+    font-size: small;
+}
+
+.comment-user-img {
+    width: 100%;
+    width:5em;
+}
+
+.comment-user {
+    color: #5C5C5C;
+    text-decoration: none;
+    font-size: medium;
+}
+
+.comment-user:hover {
+    cursor: pointer;
+    color: #000;
+    text-decoration: underline
+}
+
+.comment-body {
+    padding: 1em;
+    padding-left: 2em;
+}
+
+p.text {
+    margin-bottom: 0;
+    color: #666 !important;
+    font-size: medium;
+}
+
+
+.comment-border-link {
+    display: block;
+    position: absolute;
+    top: 6em;
+    left: 1em;
+    width: 3em;
+    height: calc(100% - 100px);
+    border-left: 0.5em solid transparent;
+    border-right: 2.3em solid transparent;
+    background-color: #CCC;
+    background-clip: padding-box;
+}
+
+
+.replies {
+    margin-left: 1em;
+}
+

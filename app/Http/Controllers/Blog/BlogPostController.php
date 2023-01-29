@@ -11,18 +11,19 @@ class BlogPostController extends Controller{
 	function showBlogPost(Request $request, $postId){
 
 
-		$post = null;
+		$post = BlogPost::with('author:id,name')
+				->where('id','=',$postId)->first();
+		$images = $post->images()->select('image_path')->get()->all();
+		$comments = $post->comments()->orderBy('created_at','asc')->get()->all();
 
-		if (is_null($post)){
+		$binding=[
+			'post'=>$post,
+			'images'=>$images,
+			'comments'=>$comments,
+		];
+		// dd($binding['comments']);
 
-			$post = BlogPost::with('author:id,name')
-					->where('id','=',$postId)->first();
-			$images = $post->images()->select('image_path')->get();
-
-		}
-
-
-		return view('/blog/blogPost', ['post'=>$post]);
+		return view('/blog/blogPost', $binding);
 
 
 	}

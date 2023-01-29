@@ -15,19 +15,13 @@ class BlogListController extends Controller{
 					->where('published','=',1)
 					->orderBy('created_at', 'desc')
 
-					->paginate(5);
-		// dd($posts);
-		// Cache::store('redis')->put('posts', $posts, 600);
-		
+					->cursorPaginate(5);
 
-		// $posts = BlogPost::with('author')->select('title','summary','publishedDate')->get();
-		// dd($posts);
-		// foreach($posts as $post){
-		// 	dd($post);
-		// }
-		
+		if($request->ajax()){
 
-
+			return view('/blog/blogListContent', ['posts'=>$posts]);
+	
+		}
 
 		return view('/blog/blogList',["posts"=>$posts]);
 	}

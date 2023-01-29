@@ -32,7 +32,7 @@ class BlogEditController extends Controller{
 					'title'=>$currPost->title,
 					'summary'=>$currPost->summary,
 					'content'=>$currPost->content,
-					'images'=>$currPost->images()->select('image_path')->get(),
+					'images'=>$currPost->images()->select(['filename','image_path'])->get(),
 				];
 				Cache::store('redis')->put('post'.$postId, $post, 600);
 			}
@@ -56,15 +56,18 @@ class BlogEditController extends Controller{
 	// 	// return $data['sss'];
 	// 	return response()->view('/home/home');
 	// }
+
+
 	function submit(Request $request,$postId){
 		// return $postId;
 
 		// return response()->json($request->all());
 		$data = $request->all();
 
-		##validation
+		// validation
 		$validator = Validator::make($data, [
 					'title' =>['required'],
+					'images' =>['nullable','max:4'],
 					'images.*' =>['image','nullable','max:1024']
 				]);
 
@@ -73,21 +76,52 @@ class BlogEditController extends Controller{
 			return response()->json($validator->errors(), 422);
 		}
 
-		// ## update blog_post data
-		// $updateData = [
-		// 	'author_id' => $request->session()->get('user_id'),
-		// 	'title' => $data['title'],
-      	// 	'summary' => $data['summary'],
-      	// 	'content' => $data['content'],
-		// ];
+		// update blog_post data
+		$updateData = [
+			'author_id' => $request->session()->get('user_id'),
+			'title' => $data['title'],
+      		'summary' => $data['summary'],
+      		'content' => $data['content'],
+      		'published'=>1,
+		];
 
-		// ## create new blog_post data
-		// if($postId==='new'){
-		// 	$postId = BlogPost::create($updateData)->id;
-		// }else{
-		// 	BlogPost::where('id','=',$postId)
-		// 	->update($updateData);
-		// }
+		// create new blog_post data
+		if($postId==='new'){
+			$postId = BlogPost::create($updateData)->id;
+		}else{
+			BlogPost::where('id','=',$postId)
+			->update($updateData);
+		}
+
+		//remove old images
+		$oldImages = PostImage::where('post_id','=',$postId)->get();
+		foreach($oldImages as $oldImage){
+			Storage::disk('images_post')->delete($oldImage->filename);
+			$oldImage->forceDelete();
+		}
+		//store image
+		// dd($data);
+		if(isset($data['images'])){
+			foreach($data['images'] as $image){
+				$filename = $image->getClientOriginalName();
+				// $filename = $image->originalName;
+				// dd($filename);
+				$filename = explode(':',$filename)[0];
+				$filename = explode('.',$filename);
+				$filename = end($filename);
+				$filename = time()."_".uniqid().".{$filename}";
+
+				$pathFilename = "/images/post/".$filename;
+				Storage::disk('images_post')->put($filename, file_get_contents($image));
+				PostImage::create([
+					'post_id'=>$postId,
+					'image_path'=>$pathFilename,
+					'filename' =>$filename,
+				]);
+				
+			}
+		}
+		return response()->json("/blog/article/{$postId}", 200);
 
 		
 	}

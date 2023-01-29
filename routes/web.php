@@ -43,10 +43,13 @@ Route::get('/blog/article/{postId}', [BlogPostController::class, 'showBlogPost']
 
 use App\Http\Controllers\Blog\BlogEditController;
 Route::get('/blog/edit/{postId}', [BlogEditController::class, 'showBlogEdit'])->name('blog-edit');  
-Route::put('/blog/edit/{postId}/submit', [BlogEditController::class, 'submit']); 
+Route::put('/blog/edit/{postId}/submit', [BlogEditController::class, 'submit']);
+
+
+use App\Http\Controllers\Blog\BlogCommentController;
+Route::put('/blog/article/{postId}/comment/{commentId?}', [BlogCommentController::class, 'create']);
+
 // Route::post('/blog/edit/{postId}/submit', [BlogEditController::class, 'submitpost']);  
-
-
 
 // Auth::routes();
 

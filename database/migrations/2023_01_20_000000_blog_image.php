@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('post_id');
             $table->string('image_path');
-            $table->string('image_caption')->nullable();  
+            $table->string('filename');  
             $table->dateTime('created_at');
         });
     }

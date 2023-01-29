@@ -13,6 +13,7 @@ class PostImage extends Model
     protected $fillable = [
         'post_id',
         'image_path',
+        'filename',
         'image_caption',
         'created_at',
     ];
