@@ -20,12 +20,12 @@
                 </a>
             </li>
             <li class="list-inline-item">
-                <a name="reply-comment" href="#comment-{{$comment->id}}-reply" >
+                <a name="reply-comment" href="#comment-{{$comment->id}}" >
                     <svg width="20" height="20"><use class="reply-icon" href="/sprite.svg#reply-icon"></use></svg>
                 </a>
             </li>
         </ul>
-        <div id="comment-{{$comment->id}}-reply" class="" style="display:none">
+        <div id="comment-{{$comment->id}}-reply" style="display:none">
             <form action="/blog/article/{{$post->id}}/comment/{{$comment->id}}"  method="post">
                 @csrf 
                 {{method_field('put')}} 

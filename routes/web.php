@@ -25,7 +25,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'showIndex'])->name('show-home');
 
 
-use App\Http\Controllers\UserRegisterController;
+use App\Http\Controllers\User\UserRegisterController;
 Route::post('/register', [UserRegisterController::class, 'register'])->name('user-register');
 
 Route::post('/login', [UserRegisterController::class, 'login'])->name('user-login');
@@ -48,6 +48,10 @@ Route::put('/blog/edit/{postId}/submit', [BlogEditController::class, 'submit']);
 
 use App\Http\Controllers\Blog\BlogCommentController;
 Route::put('/blog/article/{postId}/comment/{commentId?}', [BlogCommentController::class, 'create']);
+
+use App\Http\Controllers\User\UserLikePostController;
+Route::post('/blog/article/{postId}/like', [UserLikePostController::class, 'likePost']);
+Route::post('/blog/article/{postId}/cancel-like', [UserLikePostController::class, 'cancelLikePost']);
 
 // Route::post('/blog/edit/{postId}/submit', [BlogEditController::class, 'submitpost']);  
 

@@ -1,7 +1,8 @@
 import $ from "jquery";
+import './likepost.js';
 
 var nextUrl = '/';
-console.log($('a[rel="next"]')[0].href);
+// console.log($('a[rel="next"]')[0].href);
 
 $(window).scroll(function () {
     if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -26,10 +27,10 @@ function infinteLoadMore(url) {
             }
         })
         .done(function (response) {
-            if (response.length == 0) {
-                $('.auto-load').html("We don't have more data to display :(");
-                return;
-            }
+            // if (response.length == 0) {
+            //     $('.auto-load').html("We don't have more data to display :(");
+            //     return;
+            // }
             $('.auto-load').hide();
             $("#post-content").append(response);
         })

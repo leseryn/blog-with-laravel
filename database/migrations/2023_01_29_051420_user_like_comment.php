@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_comment', function (Blueprint $table) {
+        Schema::create('user_like_comment', function (Blueprint $table) {
             $table->id();
-            $table->integer('post_id');
             $table->integer('user_id');
-            $table->integer('parent_id')->nullable();
-            $table->string('comment')->nullable();
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
+            $table->integer('comment_id');
+            $table->dateTime('deleted_at')->nullable();
+            
       
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_comment');
+        Schema::dropIfExists('user_like_comment');
     }
 };

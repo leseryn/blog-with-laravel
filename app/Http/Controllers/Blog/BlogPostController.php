@@ -11,15 +11,17 @@ class BlogPostController extends Controller{
 	function showBlogPost(Request $request, $postId){
 
 
-		$post = BlogPost::with('author:id,name')
+		$post = BlogPost::with(['author:id,name','likes'])
 				->where('id','=',$postId)->first();
 		$images = $post->images()->select('image_path')->get()->all();
 		$comments = $post->comments()->orderBy('created_at','asc')->get()->all();
-
+		$likes = $post->likes()->count();
+		// dd($likes);
 		$binding=[
 			'post'=>$post,
 			'images'=>$images,
 			'comments'=>$comments,
+			'likes'=>$likes,
 		];
 		// dd($binding['comments']);
 

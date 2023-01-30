@@ -99,8 +99,8 @@ class BlogEditController extends Controller{
 			Storage::disk('images_post')->delete($oldImage->filename);
 			$oldImage->forceDelete();
 		}
+		
 		//store image
-		// dd($data);
 		if(isset($data['images'])){
 			foreach($data['images'] as $image){
 				$filename = $image->getClientOriginalName();

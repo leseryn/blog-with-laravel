@@ -42,4 +42,8 @@ class PostComment extends Model
         // return $this->hasMany(PostComment::class,'parent_id')->where('parent_id','=',null);
     }
 
+    public function likes(){
+        return $this->hasMany(UserLikePost::class, 'comment_id')->count();
+    }
+
 }

@@ -32,7 +32,7 @@ class BlogPost extends Model
 
     ];
 
-    protected $with = ['author','images', 'comments'];
+    protected $with = ['author','images', 'comments', 'likes'];
 
     
     public function author(){
@@ -45,6 +45,10 @@ class BlogPost extends Model
 
     public function comments(){
         return $this->hasMany(PostComment::class, 'post_id')->where('parent_id','=',null);
+    }
+
+    public function likes(){
+        return $this->hasMany(UserLikePost::class, 'post_id');
     }
 
 

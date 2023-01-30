@@ -22,7 +22,6 @@ class BlogListController extends Controller{
 			return view('/blog/blogListContent', ['posts'=>$posts]);
 	
 		}
-
 		return view('/blog/blogList',["posts"=>$posts]);
 	}
 
