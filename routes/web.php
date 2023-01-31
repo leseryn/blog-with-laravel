@@ -16,7 +16,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::get('/playground', function () {
+    event(new \App\Events\PlaygroundEvent());
+    return null;
+});
 
+// Route::get('/likepost', function () {
+//     event(new \App\Events\LikePostEvent(1));
+//     return null;
+// });
 
 // Route::get('/', 'App\Http\Controllers\HomeController@showIndex')->name('show-home');
 
@@ -27,10 +35,11 @@ Route::get('/', [HomeController::class, 'showIndex'])->name('show-home');
 
 use App\Http\Controllers\User\UserRegisterController;
 Route::post('/register', [UserRegisterController::class, 'register'])->name('user-register');
+use App\Http\Controllers\User\UserLoginController;
 
-Route::post('/login', [UserRegisterController::class, 'login'])->name('user-login');
+Route::post('/login', [UserLoginController::class, 'login']);
 
-Route::get('/logout', [UserRegisterController::class, 'logout'])->name('user-logout');   
+Route::get('/logout', [UserLoginController::class, 'logout']);
 
 
 use App\Http\Controllers\Blog\BlogListController;
@@ -49,12 +58,8 @@ Route::put('/blog/edit/{postId}/submit', [BlogEditController::class, 'submit']);
 use App\Http\Controllers\Blog\BlogCommentController;
 Route::put('/blog/article/{postId}/comment/{commentId?}', [BlogCommentController::class, 'create']);
 
-use App\Http\Controllers\User\UserLikePostController;
-Route::post('/blog/article/{postId}/like', [UserLikePostController::class, 'likePost']);
-Route::post('/blog/article/{postId}/cancel-like', [UserLikePostController::class, 'cancelLikePost']);
+use App\Http\Controllers\Blog\BlogUserLikePostController;
+Route::post('/blog/article/{postId}/like', [BlogUserLikePostController::class, 'likePost']);
+Route::post('/blog/article/{postId}/cancel-like', [BlogUserLikePostController::class, 'cancelLikePost']);
 
-// Route::post('/blog/edit/{postId}/submit', [BlogEditController::class, 'submitpost']);  
 
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

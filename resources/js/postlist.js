@@ -2,20 +2,25 @@ import $ from "jquery";
 import './likepost.js';
 
 var nextUrl = '/';
-// console.log($('a[rel="next"]')[0].href);
+
 
 $(window).scroll(function () {
     if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-        nextUrl = $('a[rel="next"]');
-        // console.log(nextUrl);
-        if(nextUrl[0]){
+
+        nextUrl = $('a[rel="next-page"]');
+
+        if(nextUrl.length>0){
             nextUrl = nextUrl[0].href;
+            console.log(nextUrl);
             infinteLoadMore(nextUrl);
+
         }
         $('nav[aria-label="Pagination Navigation"]').remove();
 
     }
 });
+
+
 function infinteLoadMore(url) {
     $.ajax({
             url: url,

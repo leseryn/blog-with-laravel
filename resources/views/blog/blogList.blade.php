@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-	BLOG!List!
+	Blog
 @endsection
 
 

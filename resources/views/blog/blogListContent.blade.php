@@ -9,15 +9,16 @@
                 <p class="card-text">{{ $post->title }}{{$post->summary}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-
+<form action="/blog/article/2/like " method="post">
+    @csrf
+    <button type="submit">fff</button>
+</form>
                         <a type="button" class="btn btn-sm btn-outline-secondary" name="like-button" style=' display: flex;'>
                         <div>
                             <svg width="20" height="20">
                                 <use class="like-icon" href="/sprite.svg#heart-icon"></use></svg>
                         </div>
-                        <div>
-                            {{$post->likes->count()}}
-                        </div>
+                        <div name="like-button-count">{{$post->likes->count()}}</div>
                         </a>
                         
                         <a type="button" class="btn btn-sm btn-outline-secondary" href="/blog/article/{{$post->id}}">View</a>
@@ -32,9 +33,12 @@
         </div>
     </div> 
 @endforeach
-<div hidden>
-{{$posts->links()}}
-</div>
+
+@if($posts->nextPageUrl())
+<nav aria-label="Pagination Navigation" >
+<a rel="next-page" href="{{$posts->nextPageUrl()}}"></a>
+</nav>
+@endif
 
 
             

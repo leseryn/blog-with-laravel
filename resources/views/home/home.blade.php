@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-	HOME
+	- Login or Register
 @endsection
 
 

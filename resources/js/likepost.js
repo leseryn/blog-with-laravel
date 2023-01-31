@@ -68,3 +68,14 @@ async function cancelLikePost(btn,post){
 		console.log(error);
 	}
 }
+
+
+const channel_likepost = Echo.channel('public.likepost');
+channel_likepost .subscribed(()=>{
+	// console.log('likepost!!');
+}).listen('.likepost',(event)=>{
+	// console.log('postid-'+event['postId']);
+	let postIdElement = document.getElementById('postid-'+event['postId']);
+	postIdElement.querySelector('[name="like-button-count"]').innerHTML=event['likes'];
+
+});

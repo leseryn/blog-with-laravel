@@ -20,4 +20,6 @@ class UserLikePost extends Model
         'user_id',
         'post_id',
     ];
+
+
 }

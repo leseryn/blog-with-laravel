@@ -11,24 +11,29 @@
 @if (isset($message))
 <div><p>{{ $message }}please login!!申請成功，請登入</p></div>
 @endif
-<div>
-	<form action="/register" method="post">
+<div class="text-center">
 
-		<input type="text" name="name" placeholder="name" value="{{old('name')}}">
-		<input type="text" name="email" placeholder="email" value="{{old('email')}}">
-		<input type="password" name="password" placeholder="password">
-		<button type="submit" > Register </button>
-	
-	</form>
-</div>
+	<div>
+		<form class="form-floating" action="/register" method="post">
+			@csrf
+			<input type="text" name="name" placeholder="name" value="{{old('name')}}">
+			<input type="text" name="email" placeholder="email" value="{{old('name')}}">
+			<input type="password" name="password" placeholder="password">
+			<button type="submit" > Register </button>
+		
+		</form>
+	</div>
 
-<div>
-	<form action="/login" method="post">
-		@csrf 
-		<input type="text" name="email" placeholder="email">
-		<input type="password" name="password" placeholder="password">
+	<div>
+		<form action="/login" method="post">
+			@csrf 
+			<input type="text" name="email" placeholder="email" value="{{old('email')}}">
+			<input type="password" name="password" placeholder="password">
 
-		<button type="submit" > Login </button>
-	
-	</form>
+			<button type="submit" > Login </button>
+		
+		</form>
+	</div>	
+
+
 </div>

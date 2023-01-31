@@ -17,6 +17,8 @@
     "dependencies": {
         "file-upload-with-preview": "^5.0.8",
         "jquery": "^3.6.3",
-        "jscroll": "^2.4.1"
+        "jscroll": "^2.4.1",
+        "laravel-echo": "^1.15.0",
+        "pusher-js": "^8.0.1"
     }
 }
