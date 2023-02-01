@@ -21,10 +21,10 @@
       <div class="navbar-collapse collapse" id="navbars" style="">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <a class="nav-link" href="/blog">Blog</a>
-          </li>
-          @if(session()->has('user_id'))
+          </li> -->
+          @auth
 	          <li class="nav-item">
 	            <a class="nav-link"  href="/logout">Logout</a>
 	          </li>
@@ -32,7 +32,7 @@
 	          <li class="nav-item">
 	            <a class="nav-link"  href="/">Login</a>
 	          </li>
-          @endif
+          @endauth
         </ul>
 
       </div>
@@ -44,7 +44,7 @@
 
 	
 
-	<div>
+	<div class="container-fuild p-3">
 
 		@yield('content')
 		

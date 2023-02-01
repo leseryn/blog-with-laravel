@@ -9,10 +9,22 @@
 @section('content')
 
  @vite('resources/js/postlist.js')
-    @if(session()->has('user_id'))
+
+         @if($errors->any())
+             <div class="alert alert-danger">
+                 <ul>
+                     @foreach ($errors->all() as $error)
+                         <li>{{ $error }}</li>
+                     @endforeach
+                 </ul>
+             </div>
+         @endif
+
+         @auth
             <a href="/blog/edit/new">new article</a>
             @csrf
-    @endif
+         @endauth
+
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="post-content">
 		@include('blog.blogListContent')

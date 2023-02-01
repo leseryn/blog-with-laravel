@@ -72,8 +72,9 @@ async function sendDataForm(url, formData){
           msgDiv.innerHTML = data[key][0];
           blogpost.insertBefore(msgDiv,null);
         }
-
       }
+      // else{
+          // window.location.replace("/blog");}
  
   }catch(error){
     console.error(error);

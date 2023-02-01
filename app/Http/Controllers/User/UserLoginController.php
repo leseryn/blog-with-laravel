@@ -12,10 +12,12 @@ class UserLoginController extends Controller{
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+    	
+    	// $this->middleware('guest')->except('logout');
     }
 
 	protected function login(Request $request){
+		// dd('dd');
 		// $data = $request->all();
 		// $validator = Validator::make($data, [
 		// 	'email' => [ 'email']
@@ -41,6 +43,7 @@ class UserLoginController extends Controller{
 
 		if (Auth::attempt($data)) {
             $request->session()->regenerate();
+
             return redirect('/');
         }
 

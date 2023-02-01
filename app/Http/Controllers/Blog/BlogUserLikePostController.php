@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Blog;
 use App\Models\UserLikePost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use APP\Events\LikePostEvent;
+use Illuminate\Support\Facades\Auth;
 class BlogUserLikePostController extends Controller
 {
     public function likePost(Request $request, $postId){
 
-        $userId = $request->session()->get('user_id');
+        $userId = Auth::user()->id;
 
         try{
             $find = userLikePost::withTrashed()
@@ -37,14 +38,17 @@ class BlogUserLikePostController extends Controller
 
     public function cancelLikePost(Request $request, $postId){
 
-        $userId = $request->session()->get('user_id');
+        $userId = Auth::user()->id;
 
         try{
 
             $find = userLikePost::withTrashed()
                 ->where('user_id',$userId)
                 ->where('post_id',$postId)->first();
-            $find->delete();
+            if($find){
+                $find->delete();
+            }
+            
 
         }catch(e){
             return response()->json(false, 422);

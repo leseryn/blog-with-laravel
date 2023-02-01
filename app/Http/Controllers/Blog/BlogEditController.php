@@ -5,14 +5,17 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use App\Models\PostImage;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 use Storage;
 use Image;
 use Validator;
 class BlogEditController extends Controller{
 
 
-	function showBlogEdit($postId){
-		
+	protected function showBlogEdit($postId){
+
 		if ($postId==='new'){
 			$post = [
 				'id'=>'new',
@@ -21,47 +24,30 @@ class BlogEditController extends Controller{
 				'content'=>'',
 			];
 		}else{
-			$post = Cache::store('redis')->get('post'.$postId);
-			$post=null;
-			if (is_null($post)){
-				$currPost = BlogPost::with('author:id,name')
-						->where('id','=',$postId)->first();
+			
+			$currPost = BlogPost::with('author:id,name')
+					->where('id','=',$postId)->first();
 
-				$post = [
-					'id'=>$postId,
-					'title'=>$currPost->title,
-					'summary'=>$currPost->summary,
-					'content'=>$currPost->content,
-					'images'=>$currPost->images()->select(['filename','image_path'])->get(),
-				];
-				Cache::store('redis')->put('post'.$postId, $post, 600);
-			}
+			
+			Gate::authorize('update', $currPost);
+
+			$post = [
+				'id'=>$postId,
+				'title'=>$currPost->title,
+				'summary'=>$currPost->summary,
+				'content'=>$currPost->content,
+				'images'=>$currPost->images()->select(['filename','image_path'])->get(),];
+
+			
 		}
 
 		return view('/blog/blogEdit', $post);
 
 	}
 
-	// function submitpost(Request $request){
-	// 	return 'pp';
-	// 	return response()->json($request->all());
-	// 	return $_POST;
-	// 	BlogPost::create([
-	// 		'author_id' => '1',
-	// 		'title' => 'ttt',
-    //   		'summary' => 'ppp',
-    //   		'content' => 'ttt',
-	// 	]);
-	// 	$data = $request->all();
-	// 	// return $data['sss'];
-	// 	return response()->view('/home/home');
-	// }
 
+	protected function submit(Request $request,$postId){
 
-	function submit(Request $request,$postId){
-		// return $postId;
-
-		// return response()->json($request->all());
 		$data = $request->all();
 
 		// validation
@@ -72,13 +58,13 @@ class BlogEditController extends Controller{
 				]);
 
 		if($validator->fails()){
-			// return redirect("/blog/edit/{$postId}/")->withErrors($validator)->withInput($request->all());
+
 			return response()->json($validator->errors(), 422);
 		}
 
 		// update blog_post data
 		$updateData = [
-			'author_id' => $request->session()->get('user_id'),
+			// 'author_id' => Auth::user()->id,
 			'title' => $data['title'],
       		'summary' => $data['summary'],
       		'content' => $data['content'],
@@ -89,8 +75,11 @@ class BlogEditController extends Controller{
 		if($postId==='new'){
 			$postId = BlogPost::create($updateData)->id;
 		}else{
-			BlogPost::where('id','=',$postId)
-			->update($updateData);
+			$currPost = BlogPost::where('id',$postId);
+
+			Gate::authorize('update', $currPost);
+
+			$currPost->update($updateData);
 		}
 
 		//remove old images
@@ -104,8 +93,6 @@ class BlogEditController extends Controller{
 		if(isset($data['images'])){
 			foreach($data['images'] as $image){
 				$filename = $image->getClientOriginalName();
-				// $filename = $image->originalName;
-				// dd($filename);
 				$filename = explode(':',$filename)[0];
 				$filename = explode('.',$filename);
 				$filename = end($filename);
@@ -126,58 +113,7 @@ class BlogEditController extends Controller{
 		
 	}
 
-	// function submit(Request $request,$postId){
 
-	// 	$data = $request->all();
-
-	// 	##validation
-	// 	$validator = Validator::make($data, [
-	// 				'title' =>['required'],
-	// 				'images.*' =>['image','nullable','max:1024']
-	// 			]);
-
-	// 	if($validator->fails()){
-	// 		return redirect("/blog/edit/{$postId}/")->withErrors($validator)->withInput($request->all());
-	// 	}
-
-	// 	## update blog_post data
-	// 	$updateData = [
-	// 		'author_id' => $request->session()->get('user_id'),
-	// 		'title' => $data['title'],
-    //   		'summary' => $data['summary'],
-    //   		'content' => $data['content'],
-	// 	];
-
-	// 	// if(isset($data['save-post'])){
-	// 	// 	$updateData['published']='1';
-	// 	// }
-
-	// 	## create new blog_post data
-	// 	if($postId==='new'){
-	// 		$postId = BlogPost::create($updateData)->id;
-	// 	}else{
-	// 		BlogPost::where('id','=',$postId)
-	// 		->update($updateData);
-	// 	}
-
-	// 	## store image
-	// 	if(isset($data['images'])){
-	// 		foreach($data['images'] as $image){
-	// 			$filename = $image->getClientOriginalName();
-	// 			$filename = time()."_".$filename;
-	// 			$pathFilename = "images/post/".$filename;
-	// 			Storage::disk('images_post')->put($filename, file_get_contents($image));
-	// 			PostImage::create([
-	// 				'post_id'=>$postId,
-	// 				'image_path'=>$pathFilename,
-	// 			]);
-	// 		}
-	// 	}
-
-	// 	Cache::store('redis')->forget('post'.$postId);
-
-	// 	return redirect("/blog/article/{$postId}");
-	// }
 
 
 }
