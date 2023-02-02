@@ -40,6 +40,9 @@ use App\Http\Controllers\User\UserLoginController;
 Route::post('/login', [UserLoginController::class, 'login']);
 Route::get('/logout', [UserLoginController::class, 'logout']);
 
+use App\Http\Controllers\User\UserProfileController;
+Route::get('/user', [UserProfileController::class, 'showProfile'])->middleware('auth');
+Route::get('/user/edit', [UserProfileController::class, 'showEdit'])->middleware('auth');
 
 use App\Http\Controllers\Blog\BlogListController;
 Route::get('/blog', [BlogListController::class, 'showBlogList']);

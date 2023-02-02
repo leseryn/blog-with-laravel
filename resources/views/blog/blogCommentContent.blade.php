@@ -30,7 +30,7 @@
             <form action="/blog/article/{{$post->id}}/comment/{{$comment->id}}"  method="post">
                 @csrf 
                 {{method_field('put')}} 
-                <textarea name="comment"></textarea>
+                <textarea class="form-control" name="comment"></textarea>
                 <button class="btn m-2">send</button>
             </form>
         </div>
@@ -40,7 +40,7 @@
     <div class="replies">
         @foreach($comment->childComment as $comment)
 
-            @include('blog.blogCommentContent')
+            @include('blog.blogCommentReplyContent')
 
         @endforeach 
     </div>

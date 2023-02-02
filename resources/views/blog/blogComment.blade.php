@@ -6,11 +6,11 @@
     </div>
     <div class="card shadow-sm">
 
-            <div class="comment">
+            <div class="comment comment-text">
                 <form  action="/blog/article/{{$post->id}}/comment"  method="post">
                     @csrf 
                     {{method_field('put')}} 
-                    <textarea  name="comment"></textarea>
+                    <textarea class="form-control" name="comment"></textarea>
                     <button class="btn">send</button>
                 </form>
             </div>

@@ -43,7 +43,7 @@
         </ul>
 
         
-        <form action="/blog/search" id="search-form" class="mb-2 mb-lg-0" method="get">
+        <form action="/blog/search" id="search-form" class="mb-2 mb-lg-0" method="get" style="display: none;">
           <input id="search-text" class="form-control" type="text" placeholder="Search" aria-label="Search" name="q">
         </form>
         <svg id="search-icon" class="mx-2 mb-lg-0" width="30" height="30"><use class="reply-icon" href="/sprite.svg#search"></use></svg>
@@ -55,7 +55,7 @@
 
         <div class="nav-item dropdown">
 					  <a class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-					    <img class="comment-user-img" src="/images/default.jpeg" style="border-radius: 50%;width: 3em;"/>
+					    <img class="comment-user-img" src="/images/profile-default.jpg" style="border-radius: 50%;width: 3em;"/>
 					  </a>
 					  <ul class="dropdown-menu dropdown-menu-end">
 						    <li><a class="dropdown-item" href="/user">Profile</a></li>

@@ -29,7 +29,7 @@
         <div class="col-md-6">
             <div class="card px-5 py-5" id="form1">
 
-<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+<ul class="nav nav-tabs nav-justified" id="homeTab" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">login</button>
   </li>
@@ -38,7 +38,7 @@
   </li>
 </ul>
 
-<div class="tab-content" id="myTabContent">
+<div class="tab-content" id="homeTabContent">
   <div class="tab-pane fade show active" id="login" role="tabpanel">
         <div class="form-data" >
             <div class="forms-inputs my-4">

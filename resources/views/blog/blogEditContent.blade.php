@@ -26,13 +26,13 @@
     		<label>Title:</label>
             </div>
             <div class="col">
-    		<textarea  name="title" rows="2" style="width: 100%">{{$title}}</textarea>
+    		<textarea  class="form-control" name="title" rows="2" style="width: 100%">{{$title}}</textarea>
             </div>
     		<p>Summary:</p>
-    		<textarea name="summary" rows="2" style="width: 100%">{{$summary}}</textarea>
+    		<textarea class="form-control" name="summary" rows="2" style="width: 100%">{{$summary}}</textarea>
     
     		 <p>Content:</p>
-    		<textarea  name="content"  rows="15" style="width: 100%" >{{$content}}</textarea>
+    		<textarea  class="form-control" name="content"  rows="15" style="width: 100%" >{{$content}}</textarea>
 
             <!-- <input type="file" class="form-control" name="images[]" multiple/> -->
              <!-- <button type="submit" name="save" class="btn">save</button> -->
