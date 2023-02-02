@@ -20,11 +20,6 @@
                     <svg width="20" height="20"><use class="reply-icon" href="/sprite.svg#reply-icon"></use></svg>
                 </a>
             </li>
-      <!--  <li class="list-inline-item">
-                <a >
-                    <svg width="20" height="20"><use class="like-icon" href="/sprite.svg#heart-icon"></use></svg>  
-                </a>
-            </li> -->
         </ul>
         <div id="comment-{{$comment->id}}-reply" style="display:none">
             <form action="/blog/article/{{$post->id}}/comment/{{$comment->id}}"  method="post">
@@ -37,13 +32,6 @@
 
     </div>
 
-    <div class="replies">
-        @foreach($comment->childComment as $comment)
-
-            @include('blog.blogCommentContent')
-
-        @endforeach 
-    </div>
 </div>
 
 

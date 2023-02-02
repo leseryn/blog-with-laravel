@@ -32,7 +32,7 @@ class UserRegisterController extends Controller{
 			'email' => $data['email'],
 			'password' =>Hash::make($data['password'])
 		]);
-		return redirect()->route('show-home',['message'=>'successfully_registered']);
+		return redirect()->route('/',['message'=>'successfully registered, login now!']);
 	}
 
 }

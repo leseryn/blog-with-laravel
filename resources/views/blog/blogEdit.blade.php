@@ -8,8 +8,10 @@
 
 @section('content')
 
-
+<div class="container">
 	@include('blog.blogEditContent')
+</div>
+	
 	
 
 

@@ -20,13 +20,10 @@
              </div>
          @endif
 
-         @auth
-            <a href="/blog/edit/new">new article</a>
-            @csrf
-         @endauth
 
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="post-content">
+
 		@include('blog.blogListContent')
 	
     </div>

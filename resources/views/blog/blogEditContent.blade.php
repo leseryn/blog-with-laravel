@@ -10,33 +10,39 @@
     </div>
     @endif
 
-    <div >
-    	
+    <div class=" py-3">
+        <div class="position-relative">
+            @if($id==='new')
+                <a  href="/blog" id="exit" name="exit" class="btn position-absolute top-50 end-0 translate-middle-y">exit</a>
+            @else
+                <a  href="/blog/article/{{$id}}" id="exit" name="exit" class="btn position-absolute top-50 end-0 translate-middle-y">exit</a>
+            @endif
+        </div>
+    	<div class="row">
     		<form  action="/blog/edit/{{$id}}/submit" id="blogpost" name="blogpost" method="post" enctype="multipart/form-data">
             @csrf
             {{method_field('put')}} 
-    		<p>Title:</p>
-    		<textarea  name="title" cols="92" rows="1" >{{$title}}</textarea>
-    
+            <div class="col">
+    		<label>Title:</label>
+            </div>
+            <div class="col">
+    		<textarea  name="title" rows="2" style="width: 100%">{{$title}}</textarea>
+            </div>
     		<p>Summary:</p>
-    		<textarea name="summary" cols="92" rows="2" >{{$summary}}</textarea>
+    		<textarea name="summary" rows="2" style="width: 100%">{{$summary}}</textarea>
     
     		 <p>Content:</p>
-    		<textarea  name="content" cols="92" rows="15" >{{$content}}</textarea>
+    		<textarea  name="content"  rows="15" style="width: 100%" >{{$content}}</textarea>
 
             <!-- <input type="file" class="form-control" name="images[]" multiple/> -->
-             <button type="submit" name="save" class="btn">save</button>
-
+             <!-- <button type="submit" name="save" class="btn">save</button> -->
              <div class="custom-file-container" data-upload-id="myUniqueUploadId"></div>
-             
+    
     		</form>
-            <button  id="savepost" name="savepost" class="btn">save and post</button>
-            @if($id==='new')
-                <a  href="/blog" id="exit" name="exit" class="btn">exit</a>
-            @else
-                <a  href="/blog/article/{{$id}}" id="exit" name="exit" class="btn">exit</a>
-            @endif
 
+            <button  id="savepost" name="savepost" class="btn">save and post</button>
+
+        </div>
     </div>
 
 @if(isset($images))
@@ -46,5 +52,5 @@
     @endforeach
 @endif
 
-    
+
 <!-- <button  id="btn">Click Me!</button> -->

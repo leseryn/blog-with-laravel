@@ -1,5 +1,6 @@
 @foreach ($posts as $post)
-    <div class="col"/>
+    <div class="col">
+        @csrf
         <div class="card shadow-sm post-card-content"  id="postid-{{$post->id}}" >
             @if(isset($post->images[0]))
                 <img class="bd-placeholder-img card-img-top" src='{{$post->images[0]->image_path}}'/>

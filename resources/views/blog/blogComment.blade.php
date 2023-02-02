@@ -1,8 +1,8 @@
 @vite('resources/js/postcomment.js')
 
-<div class="container">
+<div class="container py-3">
     <div class="row ">
-        <h3>Comments</h3>
+        <h4>Comments</h4>
     </div>
     <div class="card shadow-sm">
 
@@ -19,7 +19,7 @@
         <ul class="list-unstyled">
 
             @if(empty($comments))
-                <div>no comment yet</div>
+                <div class="px-4">no comment yet</div>
             @else($comments)
                 @foreach($comments as $comment)
                 <li> 

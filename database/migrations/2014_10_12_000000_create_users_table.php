@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-
+            
+            $table->string('role')->default('writer');
             $table->string('profile_image_path')->nullable();
             $table->string('profile_text')->nullable();
         });

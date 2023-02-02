@@ -42,9 +42,10 @@ class BlogPostPolicy
     public function create(User $user)
     {
         //
-        return $user->id === $blogPost->author_id
+        return $user->role=="writer"
                 ? Response::allow()
                 : Response::deny('permission denied');
+      
     }
 
     /**
@@ -57,6 +58,7 @@ class BlogPostPolicy
     public function update(User $user, BlogPost $blogPost)
     {
         //
+
         return $user->id === $blogPost->author_id
                 ? Response::allow()
                 : Response::deny('permission denied');

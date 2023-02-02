@@ -17,6 +17,7 @@ class BlogEditController extends Controller{
 	protected function showBlogEdit($postId){
 
 		if ($postId==='new'){
+
 			$post = [
 				'id'=>'new',
 				'title'=>'',
@@ -29,7 +30,6 @@ class BlogEditController extends Controller{
 					->where('id','=',$postId)->first();
 
 			
-			Gate::authorize('update', $currPost);
 
 			$post = [
 				'id'=>$postId,
@@ -49,7 +49,6 @@ class BlogEditController extends Controller{
 	protected function submit(Request $request,$postId){
 
 		$data = $request->all();
-
 		// validation
 		$validator = Validator::make($data, [
 					'title' =>['required'],
@@ -64,7 +63,6 @@ class BlogEditController extends Controller{
 
 		// update blog_post data
 		$updateData = [
-			// 'author_id' => Auth::user()->id,
 			'title' => $data['title'],
       		'summary' => $data['summary'],
       		'content' => $data['content'],
@@ -73,12 +71,14 @@ class BlogEditController extends Controller{
 
 		// create new blog_post data
 		if($postId==='new'){
+			Gate::authorize('create-post');
+			$updateData['author_id']=Auth::user()->id;
 			$postId = BlogPost::create($updateData)->id;
+			
 		}else{
-			$currPost = BlogPost::where('id',$postId);
-
-			Gate::authorize('update', $currPost);
-
+		// update blog_post data
+			$currPost = BlogPost::where('id',$postId)->first();
+			Gate::authorize('update-post', $currPost);
 			$currPost->update($updateData);
 		}
 
