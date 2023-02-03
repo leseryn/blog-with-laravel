@@ -3,8 +3,8 @@
 /*body {
     background-color: #F4F4F4 !important
 }
-
 */
+
 
 /*.card {
     border: none;
@@ -20,7 +20,16 @@
 img:hover {
     cursor: pointer
 }
-
+/*.video-player {
+  width: 10rem;
+  height: 10rem;
+  position: relative;
+}*/
+/*video {
+  max-width: 10rem;
+  max-width: 10rem;
+  background:black;
+}*/
 
 
 
@@ -57,6 +66,14 @@ img:hover {
     text-decoration: underline
 }
 
+.comment-user-img{
+    border-radius: 50%;
+    width: 3em;
+    margin: 0em 1em 1em 1em;
+/*    padding: 1em;*/
+
+}
+
 .comment-body {
     padding: 1em;
     padding-left: 2em;
@@ -73,11 +90,11 @@ p.text {
     display: block;
     position: absolute;
     top: 6em;
-    left: 1em;
-    width: 3em;
+    left: 0.5em;
+    width: 0.7em;
     height: calc(100% - 100px);
     border-left: 0.5em solid transparent;
-    border-right: 2.3em solid transparent;
+    border-right: 0em solid transparent;
     background-color: #CCC;
     background-clip: padding-box;
 }

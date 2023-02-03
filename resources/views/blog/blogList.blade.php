@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-	BLOG!List!
+	Blog
 @endsection
 
 
@@ -9,11 +9,21 @@
 @section('content')
 
  @vite('resources/js/postlist.js')
-    @if(session()->has('user_id'))
-            <a href="/blog/edit/new">new article</a>
-    @endif
+
+         @if($errors->any())
+             <div class="alert alert-danger">
+                 <ul>
+                     @foreach ($errors->all() as $error)
+                         <li>{{ $error }}</li>
+                     @endforeach
+                 </ul>
+             </div>
+         @endif
+
+
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="post-content">
+
 		@include('blog.blogListContent')
 	
     </div>

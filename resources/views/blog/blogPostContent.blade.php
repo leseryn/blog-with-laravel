@@ -1,13 +1,15 @@
-    <div class="container">
-        @if(session()->has('user_id'))
-            <a href="/blog/edit/{{$post->id}}">edit</a>
-        @endif
+    <div class="container py-3">
+        @auth
+        <div class="position-relative">
+            <a type="button" href="/blog/edit/{{$post->id}}" class="btn position-absolute top-50 end-0 translate-middle-y" >edit</a>
+        </div>
+        @endauth
 
         <div>
             <h2>{{$post->title}}</h2>
         </div>
         <div>
-            <h3>{{$post->created_at}}, {{$post->author->name}}</h3>
+            <h5>{{$post->created_at}}, {{$post->author->name}}</h5>
         </div>
         <div>{{$post->summary}}</div>
 

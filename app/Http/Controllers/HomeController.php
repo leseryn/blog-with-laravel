@@ -2,11 +2,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller{
-	function showIndex(Request  $request){
+	function showIndex(Request $request){
 
-		if(session()->has('user_id')){
+		if(Auth::check()){
 			return redirect()->to('/blog');
 		}
 

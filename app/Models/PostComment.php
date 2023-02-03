@@ -19,7 +19,7 @@ class PostComment extends Model
         'created_at',
     ];
 
-    protected $with = ['user','childComment'];
+    protected $with = ['user:id,name,profile_image_path','childComment'];
 
     // public function post()
     // {
@@ -31,15 +31,12 @@ class PostComment extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    // public function parentComment()
-    // {
-    //     return $this->belongsTo(PostComment::class,'parent_id');
-    // }
 
     public function childComment()
     {
         return $this->hasMany(PostComment::class,'parent_id')->orderBy('created_at','asc');
         // return $this->hasMany(PostComment::class,'parent_id')->where('parent_id','=',null);
     }
+
 
 }

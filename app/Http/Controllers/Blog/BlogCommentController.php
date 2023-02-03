@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\PostComment;
+use Illuminate\Support\Facades\Auth;
 
 class BlogCommentController extends Controller
 {
@@ -13,7 +14,7 @@ class BlogCommentController extends Controller
         $data = $request->all();
         $updateData = [
             'comment'=>$data['comment'],
-            'user_id'=>$request->session()->get('user_id'),
+            'user_id'=>Auth::user()->id,
             'post_id'=>$postId,
             'parent_id'=>$commentId,
         ];

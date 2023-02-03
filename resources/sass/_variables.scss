@@ -1,7 +1,19 @@
 // Body
 $body-bg: #F4F4F4;
 
+// $body-bg: #222;
+
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+$component-active-bg:#9B876A;
+
+
+$position-values: (
+  0: 0,
+  15: 15%,
+  25: 25%,
+  50: 50%,
+  100: 100%
+);

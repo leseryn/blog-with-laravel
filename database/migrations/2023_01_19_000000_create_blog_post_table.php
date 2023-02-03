@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('title', 100)->nullable();
             $table->text('summary')->nullable();
             $table->text('content')->nullable();
-            $table->integer('count_like')->default(0);
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
             $table->boolean('published')->default(0);

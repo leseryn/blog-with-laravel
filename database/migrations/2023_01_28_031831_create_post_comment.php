@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('parent_id')->nullable();
             $table->string('comment')->nullable();
-            $table->integer('count_like')->default(0);
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
       

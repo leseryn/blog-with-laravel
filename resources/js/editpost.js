@@ -11,6 +11,7 @@ let upload = new FileUploadWithPreview('myUniqueUploadId',{
     chooseFile: '...',
     label: 'Images Upload',}
   });
+
 let oldImages = document.getElementsByName('oldImages');
 let oldImagesArr = [];
 for (let i = oldImages.length - 1; i >= 0; i--) {
@@ -72,8 +73,9 @@ async function sendDataForm(url, formData){
           msgDiv.innerHTML = data[key][0];
           blogpost.insertBefore(msgDiv,null);
         }
-
       }
+      // else{
+          // window.location.replace("/blog");}
  
   }catch(error){
     console.error(error);
