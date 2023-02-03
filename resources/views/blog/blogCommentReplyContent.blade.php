@@ -1,8 +1,7 @@
 <div class="comment comment-reply" id="comment-{{$comment->id}}">
-       
 
     <div class="comment-heading">
-        <img class="comment-user-img" src="https://img.icons8.com/bubbles/100/000000/groups.png" >
+        <img class="comment-user-img" src="{{asset($comment->user->profile_image_path)}}" >
         <div class="comment-info">
             <a href="#" class="comment-user">{{$comment->user->name}}</a>
             <p class="comment-time">{{$comment->created_at}}</p>

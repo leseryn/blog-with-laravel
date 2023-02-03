@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
             
             $table->string('role')->default('writer');
-            $table->string('profile_image_path')->nullable();
+            $table->string('profile_image_path')->default('/images/profile-default.jpg');
             $table->string('profile_text')->nullable();
         });
     }

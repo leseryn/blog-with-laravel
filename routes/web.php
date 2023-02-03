@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/playground', function () {
-    event(new \App\Events\PlaygroundEvent());
-    return null;
-});
-
 // Route::get('/likepost', function () {
 //     event(new \App\Events\LikePostEvent(1));
 //     return null;
@@ -43,6 +38,9 @@ Route::get('/logout', [UserLoginController::class, 'logout']);
 use App\Http\Controllers\User\UserProfileController;
 Route::get('/user', [UserProfileController::class, 'showProfile'])->middleware('auth');
 Route::get('/user/edit', [UserProfileController::class, 'showEdit'])->middleware('auth');
+Route::put('/user/edit/submit', [UserProfileController::class, 'submit'])->middleware('auth');
+
+
 
 use App\Http\Controllers\Blog\BlogListController;
 Route::get('/blog', [BlogListController::class, 'showBlogList']);

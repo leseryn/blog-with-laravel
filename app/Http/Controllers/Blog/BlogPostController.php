@@ -11,7 +11,7 @@ class BlogPostController extends Controller{
 	function showBlogPost(Request $request, $postId){
 
 
-		$post = BlogPost::with(['author:id,name','likes'])
+		$post = BlogPost::with(['author:id,name,profile_image_path','likes'])
 				->where('id','=',$postId)->first();
 		$images = $post->images()->select('image_path')->get()->all();
 		$comments = $post->comments()->orderBy('created_at','asc')->get()->all();

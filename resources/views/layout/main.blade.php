@@ -55,7 +55,7 @@
 
         <div class="nav-item dropdown">
 					  <a class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-					    <img class="comment-user-img" src="/images/profile-default.jpg" style="border-radius: 50%;width: 3em;"/>
+					    <img class="comment-user-img" src="{{Auth::user()->profile_image_path}}" style="border-radius: 50%;width: 3em;"/>
 					  </a>
 					  <ul class="dropdown-menu dropdown-menu-end">
 						    <li><a class="dropdown-item" href="/user">Profile</a></li>

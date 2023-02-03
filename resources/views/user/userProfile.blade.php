@@ -1,4 +1,7 @@
+
+@vite('resources/js/editprofile.js')
 @extends('layout.main')
+
 
 
 @section('title')

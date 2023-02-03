@@ -8,33 +8,33 @@
 					</a>
 				
 				<div class="row text-start">
-					<div class="col text-center">
+					<div class="col text-center" style=" clip-path: circle(6em at center);">
 						@if($image)
-							<img id="profile-edit-image-preview" src="{{asset(image)}}" >
+							<img id="profile-edit-image-preview" src="{{asset($image)}}" style="width: 12em;">
 						@else
-							<img id="profile-edit-image-preview" src="images/profile-default.jpg" style="border-radius: 50%;width: 8em;">
+							<img id="profile-edit-image-preview" src="images/profile-default.jpg" style="width: 12em;">
+
 						@endif
 					</div>
-		    		<form  action="#" id="blogpost" name="blogpost" method="post" enctype="multipart/form-data">
+
+		    		<form  action="/user/edit/submit" id="profile-edit-form" method="post" enctype="multipart/form-data">
 		            @csrf
 		            {{method_field('put')}} 
-		            <div class="col">
+		            <div class="col my-3">
 		            	<label class="form-label">Profile Image Upload:</label>
-		            	<input class="form-control" type="file"/>  
-		            </div>
-
+		            	<input class="form-control" id="profile-image-upload" name="image" type="file" />  
+		            <div class="col my-3">
 		    			<label class="form-label">Introduction:</label>
-
-		            <div class="col">
-		    			<textarea  class="form-control" name="profile_text" rows="2" style="width: 100%"></textarea>
+		    			<textarea  class="form-control" name="text" rows="2" style="width: 100%"></textarea>
 		            </div>
+<button type="submit"> SAVVVVE</button>
 		    		</form>
-
-		            <button  id="savepost" name="savepost" class="btn">save</button>
+		    		<div class="col my-3 text-center">
+		            	<a  id="save-profile" name="save-profile" class="btn">save</a>
+		            </div>
 
 		        </div>
 
-				<img hidden scr=""/>
 			
 			</div>
 		</div>

@@ -66,6 +66,14 @@ img:hover {
     text-decoration: underline
 }
 
+.comment-user-img{
+    border-radius: 50%;
+    width: 3em;
+    margin: 0em 1em 1em 1em;
+/*    padding: 1em;*/
+
+}
+
 .comment-body {
     padding: 1em;
     padding-left: 2em;
