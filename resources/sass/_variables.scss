@@ -9,7 +9,6 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 $component-active-bg:#9B876A;
 
-
 $position-values: (
   0: 0,
   15: 15%,
@@ -17,3 +16,11 @@ $position-values: (
   50: 50%,
   100: 100%
 );
+
+.btn{
+  color:#000;
+  border:none;
+}
+.btn:focus{
+color:#888;
+}

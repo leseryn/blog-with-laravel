@@ -111,7 +111,7 @@ function cropImage(options) {
 }
 
 function image2base64(file, callback) {
-  if (!/image\/(png|jpg|jpeg|gif)/.test(file.type)) throw "Not Vaid Image";
+  if (!/image\/(png|jpg|jpeg|gif)/.test(file.type)) throw "Not Valid Image";
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = () => {

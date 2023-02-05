@@ -3,7 +3,7 @@
     <div class="comment-heading">
         <img class="comment-user-img" src="{{asset($comment->user->profile_image_path)}}" >
         <div class="comment-info">
-            <a href="#" class="comment-user">{{$comment->user->name}}</a>
+            <a href="#" class="comment-user">{{$comment->user->display_name}}</a>
             <p class="comment-time">{{$comment->created_at}}</p>
         </div>
 
@@ -19,14 +19,14 @@
                 </a>
             </li>
         </ul>
-        <div id="comment-{{$comment->id}}-reply" style="display:none">
-            <form action="/blog/article/{{$post->id}}/comment/{{$comment->parent_id}}"  method="post">
+<!--         <div id="comment-{{$comment->id}}-reply" style="display:none">
+            <form action="/blog/article/{{$comment->post_id}}/comment/{{$comment->parent_id}}"  method="post">
                 @csrf 
                 {{method_field('put')}} 
                 <textarea class="form-control" name="comment"></textarea>
                 <button class="btn m-2">send</button>
             </form>
-        </div>
+        </div> -->
 
     </div>
 

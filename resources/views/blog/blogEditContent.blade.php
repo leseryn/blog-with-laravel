@@ -35,7 +35,7 @@
     		<textarea  class="form-control" name="content"  rows="15" style="width: 100%" >{{$content}}</textarea>
 
             <!-- <input type="file" class="form-control" name="images[]" multiple/> -->
-             <!-- <button type="submit" name="save" class="btn">save</button> -->
+             <button type="submit" name="save" class="btn">save</button>
              <div class="custom-file-container" data-upload-id="myUniqueUploadId"></div>
     
     		</form>

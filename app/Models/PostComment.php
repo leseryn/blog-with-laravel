@@ -19,7 +19,7 @@ class PostComment extends Model
         'created_at',
     ];
 
-    protected $with = ['user:id,name,profile_image_path','childComment'];
+    // protected $with = ['user:id,name,display_name,profile_image_path','childComment'];
 
     // public function post()
     // {

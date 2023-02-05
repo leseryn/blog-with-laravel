@@ -43,15 +43,24 @@ Route::put('/user/edit/submit', [UserProfileController::class, 'submit'])->middl
 
 
 use App\Http\Controllers\Blog\BlogListController;
+//user and the following 
 Route::get('/blog', [BlogListController::class, 'showBlogList']);
 Route::get('/blog/likes', [BlogListController::class, 'showLikes'])->middleware('auth');
 Route::get('/blog/search', [BlogListController::class, 'showSearch']);
 Route::get('/blog/user', [BlogListController::class, 'showUserPost'])->middleware('auth');
 
+//user post page with profile
+Route::get('/{authorName}',[BlogListController::class, 'showUserPost']);
 
+
+use App\Http\Controllers\User\UserFollowController;
+//follow user
+Route::post('/{authorName}/follow',[UserFollowController::class, 'follow'])->middleware('auth');
+Route::post('/{authorName}/unfollow',[UserFollowController::class, 'unfollow'])->middleware('auth');
 
 use App\Http\Controllers\Blog\BlogPostController;
 Route::get('/blog/article/{postId}', [BlogPostController::class, 'showBlogPost']);
+Route::get('/blog/article/commentload/{parentId}/{lastId}', [BlogPostController::class, 'loadComment']);
 
 
 

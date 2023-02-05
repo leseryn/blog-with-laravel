@@ -26,7 +26,7 @@ class BlogEditController extends Controller{
 			];
 		}else{
 			
-			$currPost = BlogPost::with('author:id,name')
+			$currPost = BlogPost::with('user:id,name')
 					->where('id','=',$postId)->first();
 
 			
@@ -72,13 +72,15 @@ class BlogEditController extends Controller{
 		// create new blog_post data
 		if($postId==='new'){
 			Gate::authorize('create-post');
-			$updateData['author_id']=Auth::user()->id;
+			$updateData['user_id']=Auth::user()->id;
 			$postId = BlogPost::create($updateData)->id;
 			
 		}else{
 		// update blog_post data
 			$currPost = BlogPost::where('id',$postId)->first();
+
 			Gate::authorize('update-post', $currPost);
+			
 			$currPost->update($updateData);
 		}
 
@@ -108,7 +110,7 @@ class BlogEditController extends Controller{
 				
 			}
 		}
-		return response()->json("/blog/article/{$postId}", 200);
+		return response()->json("/blog/#postid-{$postId}", 200);
 
 		
 	}

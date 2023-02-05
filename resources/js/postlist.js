@@ -36,6 +36,7 @@ function infinteLoadMore(url) {
             //     $('.auto-load').html("We don't have more data to display :(");
             //     return;
             // }
+            // console.log(typeof(response));
             $('.auto-load').hide();
             $("#post-content").append(response);
         })

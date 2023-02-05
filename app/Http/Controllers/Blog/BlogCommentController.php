@@ -19,9 +19,23 @@ class BlogCommentController extends Controller
             'parent_id'=>$commentId,
         ];
 
-        $commentId =  PostComment::create($updateData)->id;
+        // $commentId =  PostComment::create($updateData)->id;
 
-        return redirect()->to("/blog/article/{$postId}#comment-{$commentId}");
+        // return redirect()->to("/blog/article/{$postId}#comment-{$commentId}");
+
+        $comment = PostComment::create($updateData);
+// dd($comment);
+
+        $binding =['comment'=>$comment];
+
+        // return view('/blog/blogCommentContent', $binding);
+        $data = [
+            'view'=>view('/blog/blogCommentContent', $binding)->render(),
+            'commentId'=>$comment->id,
+        ];
+
+        return response()->json($data, 200);
+
         
     }
 

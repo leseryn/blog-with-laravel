@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'display_name',
         'email',
         'password',
         'profile_image_path',
@@ -43,4 +44,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // protected $with = ['likes','follow','followBy'];
+
+    public function likes(){
+        return $this->hasMany(UserLikePost::class, 'user_id');
+    }
+
+    public function follow(){
+        return $this->hasMany(UserFollow::class, 'user_id');
+    }
+
+    public function followBy(){
+        return $this->hasMany(UserFollow::class, 'following_user_id');
+    }
+
 }

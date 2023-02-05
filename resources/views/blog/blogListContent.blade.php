@@ -27,19 +27,19 @@
                             </div>
                             
                         @endif
-                        <div name="like-button-count">{{$post->likes->count()}}</div>
+                        <div name="like-button-count">{{$post->likes_count}}</div>
                         </a>
 
                         
                         <a type="button" class="btn btn-sm btn-outline-secondary" href="/blog/article/{{$post->id}}">View</a>
                         @auth
-                        @if(Auth::user()->id===$post->author_id)
+                        @if(Auth::user()->id===$post->user_id)
                         <a type="button" class="btn btn-sm btn-outline-secondary" href="/blog/edit/{{$post->id}}">Edit</a>
                         @endif
                         @endauth
                       
                     </div>
-                    <small class="text-muted">{{$post->created_at->diffForHumans()}}, {{$post->author->name}}</small>
+                    <small class="text-muted">{{$post->created_at->diffForHumans()}}, {{$post->user->display_name}}</small>
                 </div>
             </div>
 

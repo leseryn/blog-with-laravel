@@ -9,7 +9,7 @@
             <h2>{{$post->title}}</h2>
         </div>
         <div>
-            <h5>{{$post->created_at}}, {{$post->author->name}}</h5>
+            <h5>{{$post->created_at}}, {{$post->user->name}}</h5>
         </div>
         <div>{{$post->summary}}</div>
 

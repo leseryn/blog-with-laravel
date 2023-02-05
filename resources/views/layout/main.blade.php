@@ -11,7 +11,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar py-0 m-0 navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="/blog">
       	<svg width="40" height="40"><use class="reply-icon" href="/sprite.svg#sloth"></use></svg>
@@ -35,15 +35,16 @@
 	            <a class="nav-link"  href="/blog/edit/new">New Post</a>
 	          </li>
 
+
           @else
 	          <li class="nav-item">
 	            <a class="nav-link"  href="/">Login</a>
 	          </li>
           @endauth
-        </ul>
+          	</ul>
 
-        
-        <form action="/blog/search" id="search-form" class="mb-2 mb-lg-0" method="get" style="display: none;">
+ 
+           <form action="/blog/search" id="search-form" class="mb-2 mb-lg-0" method="get" style="display: none;">
           <input id="search-text" class="form-control" type="text" placeholder="Search" aria-label="Search" name="q">
         </form>
         <svg id="search-icon" class="mx-2 mb-lg-0" width="30" height="30"><use class="reply-icon" href="/sprite.svg#search"></use></svg>
@@ -52,18 +53,22 @@
 
         @auth
 
-
-        <div class="nav-item dropdown">
-					  <a class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-					    <img class="comment-user-img" src="{{Auth::user()->profile_image_path}}" style="border-radius: 50%;width: 3em;"/>
+        <div class="navbar-nav">
+					  <a class="nav-link dropdown-toggle "  data-bs-toggle="dropdown" aria-expanded="false">
+					    <img class="comment-user-img mb-0" src="{{Auth::user()->profile_image_path}}" style="border-radius: 50%;width: 3em;"/>
 					  </a>
-					  <ul class="dropdown-menu dropdown-menu-end">
-						    <li><a class="dropdown-item" href="/user">Profile</a></li>
-						    <li><a class="dropdown-item" href="/blog/user">My Post</a></li>
+					  <ul class="dropdown-menu dropdown-menu-end mb-2">
+						    <li><a class="dropdown-item" href="/{{Auth::user()->name}}">My Post</a></li>
 						    <li><a class="dropdown-item" href="/logout">Logout</a></li>
 					  </ul>
 				</div>
+
         @endauth
+
+        
+
+        
+
       </div>
 
     </div>

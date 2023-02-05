@@ -12,7 +12,7 @@ class BlogPost extends Model
 
 
     protected $fillable = [
-        'author_id',
+        'user_id',
         'title',
         'summary',
         'content',
@@ -32,11 +32,14 @@ class BlogPost extends Model
 
     ];
 
-    protected $with = ['author','images', 'comments', 'likes'];
+    protected $with = ['user:id,name,display_name,profile_image_path,profile_text',
+                        'images',
+                        'comments',
+                        'likes'];
 
-    
-    public function author(){
-        return $this->belongsTo(User::class,'author_id');
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function images(){

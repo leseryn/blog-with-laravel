@@ -18,9 +18,9 @@ class UserRegisterController extends Controller{
 
 		$data = $request->all();
 		$validator = Validator::make($data, [
-			'name' =>['required'],
+			'name' =>['required','unique:users','min:4','max:16','alpha_dash:ascii'],
 			'email' => ['required','unique:users', 'email'],
-			'password' =>['required','min:6','max:12']
+			'password' =>['required','min:6','max:16']
 		]);
 		
 		if($validator->fails()){
@@ -29,6 +29,7 @@ class UserRegisterController extends Controller{
 
 		User::create([
 			'name' =>$data['name'],
+			'display_name'=>'sloth_'.uniqid(),
 			'email' => $data['email'],
 			'password' =>Hash::make($data['password'])
 		]);
