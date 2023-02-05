@@ -31,14 +31,16 @@ class BlogPostController extends Controller{
 
 
 	// }
-
+	
 	var $showComments=3;
 
 	function showBlogPost(Request $request, $postId){
 
+		
 
 		$post = BlogPost::with(['user:id,name,profile_image_path','likes'])
 				->where('id','=',$postId)->first();
+			
 		$images = $post->images()->select('image_path')->get()->all();
 		$comments = $post->comments()
 					->orderBy('created_at','desc')
@@ -51,15 +53,26 @@ class BlogPostController extends Controller{
 		// dd($comments->currentPage());
 		$likes = $post->likes()->count();
 		// dd($likes);
+
 		$binding=[
 			'post'=>$post,
 			'images'=>$images,
 			'comments'=>$comments->reverse(),
 			'hasMorePages'=>$comments->hasMorePages(),
 			'likes'=>$likes,
+
 		];
 		// dd($binding['comments']);
 
+		if($request->ajax()){
+
+			$data=[
+				'view'=>view('/blog/blogPostLoad', $binding)->render(),
+			];
+
+			return response()->json($data, 200);
+		}
+		// return view('/blog/blogPostLoad', $binding);
 		return view('/blog/blogPost', $binding);
 
 	}

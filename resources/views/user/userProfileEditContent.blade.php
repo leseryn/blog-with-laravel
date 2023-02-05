@@ -3,7 +3,7 @@
 			
 			<div class="m-3 shadow p-3 mb-5 rounded" id="edit-profile-indiv" style="background: #9f8f8f;opacity:0.9;">
 
-					<a id="exit-edit" name="exit-edit" class="position-absolute top-0 start-100 " style="transform:translate(-100%);">
+					<a id="exit-edit" name="exit-edit" class="exit-btn position-absolute top-0 start-100 " style="transform:translate(-100%);">
 						<svg width="30" height="30"><use href="/sprite.svg#circle-x"></use></svg>
 					</a>
 				

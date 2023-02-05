@@ -162,6 +162,8 @@ class BlogListController extends Controller{
 			->where('name',$authorName)->first();
 			if($userId===$authorInfo->id){
 				$userIsAuthor = true;
+			}else{
+				$userIsAuthor = false;
 			}
 			
 		}else{ 

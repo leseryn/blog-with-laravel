@@ -1,6 +1,6 @@
 import $ from "jquery";
 import './likepost.js';
-
+import './postlist_loadpost';
 var nextUrl = '/';
 
 

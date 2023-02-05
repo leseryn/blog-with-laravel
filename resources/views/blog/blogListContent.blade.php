@@ -31,7 +31,14 @@
                         </a>
 
                         
-                        <a type="button" class="btn btn-sm btn-outline-secondary" href="/blog/article/{{$post->id}}">View</a>
+                        <a type="button" name="comment-button" class="btn btn-sm btn-outline-secondary d-flex">
+                            <div>
+                                <svg width="20" height="20">
+                                    <use href="/sprite.svg#comment"></use></svg>
+                            </div>
+                            <div name="comment-button-count">{{$post->comments_count}}</div>
+
+                        </a>
                         @auth
                         @if(Auth::user()->id===$post->user_id)
                         <a type="button" class="btn btn-sm btn-outline-secondary" href="/blog/edit/{{$post->id}}">Edit</a>

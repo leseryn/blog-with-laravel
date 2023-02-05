@@ -11,7 +11,11 @@
     </div>
 
     <div class="comment-body">
-        <p class="text">{{$comment->comment}}</p>
+        <div class="">
+            <x-markdown >
+                {{$comment->comment}}
+            </x-markdown>
+        </div>
         <ul class="list-inline">
             <li class="list-inline-item px-2" name="reply-icon">
                 <!-- <div class="reply-icon"> -->

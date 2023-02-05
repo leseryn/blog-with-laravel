@@ -50,7 +50,9 @@
 		</div>
 
 		<div class="col-md-12 ">
-			{{$intro}}
+			<x-markdown >
+				{{$intro}}
+			</x-markdown >
 		</div>
 
 

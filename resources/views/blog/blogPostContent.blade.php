@@ -11,9 +11,21 @@
         <div>
             <h5>{{$post->created_at}}, {{$post->user->name}}</h5>
         </div>
-        <div>{{$post->summary}}</div>
+        <div>
+            <x-markdown >
 
-        <div>{{$post->content}}</div>
+                {{$post->summary}}
+                
+            </x-markdown>
+        </div>
+
+        <div>
+            <x-markdown >
+
+                {{$post->content}}
+
+            </x-markdown>
+        </div>
 
         @if(!empty($images))
             @foreach($images as $image)

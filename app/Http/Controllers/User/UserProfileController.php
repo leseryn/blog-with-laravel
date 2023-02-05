@@ -59,7 +59,6 @@ class UserProfileController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-// dd($validator);
         //store image
         if(isset($data['image'])){
             $imageFilename = $data['image']->getClientOriginalName();
