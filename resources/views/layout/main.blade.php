@@ -81,10 +81,10 @@
 		
 	</div>
 
-	<footer hidden>
+<!-- 	<footer hidden>
 		 This is footer:)))
 		 I have no Footer:(((
-	</footer>
+	</footer> -->
 
 
 

@@ -111,11 +111,13 @@ async function submitComment(btnElement){
         	body:formData
 		});
 		if(response.status=="200"){
+
 			let data = await response.json();
 			let currCommentTextElement = $(btnElement).parents('div.comment-text')[0];
 			let textarea = $(currCommentTextElement).find('textarea')[0];
 			$(textarea).val('');
 			$(parentCommentDivElement).append(data['view']);
+			console.log(parentCommentDivElement)
 			location.hash = 'comment-'+data['commentId'];
 		}
 	}catch(error){

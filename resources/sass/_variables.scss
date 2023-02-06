@@ -8,7 +8,7 @@ $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 $component-active-bg:#9B876A;
-
+$link-color:#888;
 $position-values: (
   0: 0,
   5: 5%,
@@ -20,10 +20,3 @@ $position-values: (
   100: 100%
 );
 
-.btn{
-  color:#000;
-  border:none;
-}
-.btn:focus{
-color:#888;
-}

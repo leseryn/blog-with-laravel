@@ -61,7 +61,7 @@ Route::post('/{authorName}/unfollow',[UserFollowController::class, 'unfollow'])-
 use App\Http\Controllers\Blog\BlogPostController;
 Route::get('/blog/article/{postId}', [BlogPostController::class, 'showBlogPost']);
 Route::get('/blog/article/commentload/{parentId}/{lastId}', [BlogPostController::class, 'loadComment']);
-
+Route::get('/blog/article/imageslider/{postId}', [BlogPostController::class, 'loadImageSlider']);
 
 
 use App\Http\Controllers\Blog\BlogEditController;
