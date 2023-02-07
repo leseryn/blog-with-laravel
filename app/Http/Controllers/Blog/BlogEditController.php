@@ -51,7 +51,7 @@ class BlogEditController extends Controller{
 		$currPost = BlogPost::where('id',$postId)->first();;
 		Gate::authorize('delete-post', $currPost);
 		$currPost->delete();
-		return response('deleted', 200);
+		return response()->json('deleted...', 200);
 	}
 
 

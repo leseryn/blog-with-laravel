@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use App\Models\PostComment;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 use Storage;
 class BlogPostController extends Controller{
 
@@ -23,7 +24,18 @@ class BlogPostController extends Controller{
 		
 		$likes = $post->likes()->count();
 
+		$authId = null;
+		$deletePermission = false;
+		if(Auth::check()){
+			$authId = Auth::user()->id;
+			if ($authId == $post->user_id){
+				$deletePermission = true;
+			}
+		}
+
 		$binding=[
+			'authId'=>$authId,
+			'deletePermission'=>$deletePermission,
 			'post'=>$post,
 			'images'=>$images,
 			'comments'=>$comments->reverse(),
@@ -46,6 +58,8 @@ class BlogPostController extends Controller{
 	}
 
 	public function loadComment($parentId,$lastId){
+
+
 		if($parentId==="none"){
 			$comments = PostComment::
 				where('post_id', PostComment::where('id',$lastId)->first()->post_id)
@@ -53,11 +67,6 @@ class BlogPostController extends Controller{
 				->where('id','<',$lastId)
 				->orderBy('created_at','desc')
 				->simplePaginate($this->showComments);
-			$binding=[
-				'type'=>"main",
-				'comments'=>$comments->reverse(),
-			];
-
 		}else{
 
 			if($lastId==="none"){
@@ -71,14 +80,26 @@ class BlogPostController extends Controller{
 				->where('id','<',$lastId)
 				->orderBy('created_at','desc')
 				->simplePaginate($this->showComments);
-			}
-			$binding=[
-				'type'=>"replies",
-				'comments'=>$comments->reverse(),
-			];
-
-
+			}			
 		}
+
+		$commentsReverse = $comments->reverse();
+		$authId = null;
+		$deletePermission=false;
+		if(Auth::check()){
+			$authId = Auth::user()->id;
+			if ($authId == $commentsReverse->first()->post()->first()->user_id){
+				$deletePermission = true;
+			}
+		}
+
+		$binding=[
+				'authId'=>$authId,
+				'deletePermission'=>$deletePermission,
+				'authId'=>$authId,
+				'type'=>"replies",
+				'comments'=>$commentsReverse,
+		];
 
 		$data=[
 			'view'=>view('/blog/blogCommentLoad',$binding)->render(),

@@ -77,6 +77,7 @@ Route::put('/blog/edit/{postId}/submit', [BlogEditController::class, 'submit'])-
 
 use App\Http\Controllers\Blog\BlogCommentController;
 Route::put('/blog/article/{postId}/comment/{commentId?}', [BlogCommentController::class, 'create'])->middleware('auth');
+Route::post('/blog/article/comment-delete/{commentId}', [BlogCommentController::class, 'delete'])->middleware('auth');
 
 use App\Http\Controllers\Blog\BlogUserLikePostController;
 Route::post('/blog/article/{postId}/like', [BlogUserLikePostController::class, 'likePost'])->middleware('auth');

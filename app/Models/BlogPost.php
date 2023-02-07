@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class BlogPost extends Model
 {
+
+    use SoftDeletes;
     protected $table = 'blog_post';
 
     protected $primaryKey = 'id';
@@ -35,7 +37,8 @@ class BlogPost extends Model
     protected $with = ['user:id,name,display_name,profile_image_path,profile_text',
                         'images',
                         'comments',
-                        'likes'];
+                        'likes',
+                        'commentsAll'];
 
 
     public function user(){
@@ -48,6 +51,9 @@ class BlogPost extends Model
 
     public function comments(){
         return $this->hasMany(PostComment::class, 'post_id')->where('parent_id','=',null);
+    }
+    public function commentsAll(){
+        return $this->hasMany(PostComment::class, 'post_id');
     }
 
     public function likes(){

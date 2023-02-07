@@ -8,13 +8,26 @@
 
             <div class="comment-text">
                 <form  action="/blog/article/{{$post->id}}"  method="post">
+    
+                    @if($authId)
+                    <div hidden name="authcheck"></div>
                     @csrf 
+                    @endif
                     {{method_field('put')}} 
                     <textarea class="form-control" name="comment"></textarea>
                     <div class="btn m-1" name="submit-comment">send</div>
-                </form>
-            </div>
 
+                </form>
+
+
+            </div>
+<!-- <form  action="/blog/article/{{$post->id}}/comment"  method="post">
+    @csrf 
+    {{method_field('put')}} 
+    <textarea class="form-control" name="comment"></textarea>
+    <button type="submit" class="btn m-1">send</button>
+
+</form> -->
             <div class="comment-div main-comment"> 
 
                 @if($hasMorePages)

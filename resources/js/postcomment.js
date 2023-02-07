@@ -67,13 +67,52 @@ document.body.addEventListener("click",(e)=>{
 		
 		submitComment(e.target);
 
+	}else if($(e.target).attr('name')=="delete-comment"){
+		
+		deleteComment(e.target);
+
 	}
 
 });
 
+async function deleteComment(btnElement){
+
+	let confirmResult = confirm('want to delete comment?');
+	if(!confirmResult){
+		return;
+	}
+	let commentElement = $(btnElement).parents('.comment')[0];
+	// console.log(commentElement);
+	let commentId = commentElement.id.split('-')[1];
+	// console.log(commentId);
+	let url = '/blog/article/comment-delete/'+commentId;
+	try{
+		let response = await fetch(url,{
+			method:'post',
+			headers:{
+        		"X-CSRF-Token": document.querySelector('input[name=_token]').value,},
+		});
+		if(response.ok && response.status=="200"){
+
+			let data = await response.json();
+			alert(data);
+			commentElement.remove();
+
+		}
+
+	}catch(e){
+		console.error();
+	}
+}
+
 async function submitComment(btnElement){
 
-	// console.log(btnElement);
+	// console.log();
+	let authcheck = $(btnElement).siblings('[name="authcheck"]')[0];
+	if(!authcheck){
+		window.location.href = '/login';
+		return;
+	}
 
 	let parentCommentElement = $(btnElement).parents('.comment');
 	let parentCommentDivElement; 
@@ -107,10 +146,13 @@ async function submitComment(btnElement){
 		let response = await fetch(url,{
 			method:'post',
 			headers:{
-        		"X-CSRF-Token": document.querySelector('input[name=_token]').value},
+        		"X-CSRF-Token": document.querySelector('input[name=_token]').value,
+        		"X-Requested-With": "XMLHttpRequest",},
         	body:formData
 		});
-		if(response.status=="200"){
+		// console.log(response.status);
+		if(response.ok){
+		// if(response.status==="200"){
 
 			let data = await response.json();
 			let currCommentTextElement = $(btnElement).parents('div.comment-text')[0];
@@ -119,8 +161,13 @@ async function submitComment(btnElement){
 			$(parentCommentDivElement).append(data['view']);
 			console.log(parentCommentDivElement)
 			location.hash = 'comment-'+data['commentId'];
+		}else{
+			let err = await response.json();
+			console.log(err);
 		}
-	}catch(error){
+
+		
+	}catch(e){
 		console.error();
 	}
 	
@@ -149,13 +196,12 @@ async function loadComment(loadLinkElement,commentType,lastLoadCommentId,parentC
 				$(loadLinkElement).hide();
 				let hideLinkElement=$(loadLinkElement).siblings()[0];
 				$(hideLinkElement).show();
-			
 			}
-
 		}
 
 
+
 	}catch(e){
-		console.error(e);
+		console.error();
 	}
 }

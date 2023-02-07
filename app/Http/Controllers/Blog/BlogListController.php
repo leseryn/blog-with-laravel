@@ -28,7 +28,7 @@ class BlogListController extends Controller{
 			array_push($userfollow,$userId);
 			$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
 					->withCount('likes')
-					->withCount('comments')
+					->withCount('commentsAll')
 					->with(['user:id,display_name,name',])
 					->whereIn('user_id',$userfollow)
 					->where('published','=',1)
@@ -40,7 +40,7 @@ class BlogListController extends Controller{
 			$userfollow = Auth::user()->follow()->get('following_user_id')->toArray();
 			$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
 					->withCount('likes')
-					->withCount('comments')
+					->withCount('commentsAll')
 					->with(['user:id,display_name,name',])
 					->where('published','=',1)
 					->orderBy('created_at', 'desc')
@@ -49,13 +49,15 @@ class BlogListController extends Controller{
 		}else{
 			$posts = BlogPost::with(['user:id,display_name,name',])
 					->withCount('likes')
-					->withCount('comments')
+					->withCount('commentsAll')
 					->where('published','=',1)
 					->orderBy('created_at', 'desc')
 					->paginate($this->showPosts);
 			
 
 		}
+
+		// dd($posts);
 
 		if($request->ajax()){
 
@@ -75,7 +77,7 @@ class BlogListController extends Controller{
 		$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
 			->with(['user:id,display_name',])
 			->withCount('likes')
-			->withCount('comments')
+			->withCount('commentsAll')
 			->whereRelation('likes', 'user_id', '=', $userId)
 			->where('published','=',1)
 			->orderBy('created_at', 'desc')
@@ -99,7 +101,7 @@ class BlogListController extends Controller{
 			$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
 					->with(['user:id,display_name',])
 					->withCount('likes')
-					->withCount('comments')
+					->withCount('commentsAll')
 					->where('published','=',1)
 					->where('title','like','%'.$search.'%')
 					->orWhere('summary','like','%'.$search.'%')
@@ -110,7 +112,7 @@ class BlogListController extends Controller{
 		else{
 			$posts = BlogPost::with(['user:id,name',])
 					->withCount('likes')
-					->withCount('comments')
+					->withCount('commentsAll')
 					->where('published','=',1)
 					->where('title','like','%'.$search.'%')
 					->orWhere('summary','like','%'.$search.'%')
@@ -136,7 +138,7 @@ class BlogListController extends Controller{
 			$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
 				->whereRelation('user','name','=',$authorName)
 				->withCount('likes')
-				->withCount('comments')
+				->withCount('commentsAll')
 				->withOnly(['user:id,display_name,profile_image_path,profile_image_path'])
 				->where('published','=',1)
 				->orderBy('created_at', 'desc')
@@ -147,7 +149,7 @@ class BlogListController extends Controller{
 
 			$posts = BlogPost::whereRelation('user','name','=',$authorName)
 				->withCount('likes')
-				->withCount('comments')
+				->withCount('commentsAll')
 				->withOnly(['user:id,display_name,profile_image_path,profile_image_path'])
 				->where('published','=',1)
 				->orderBy('created_at', 'desc')

@@ -36,7 +36,7 @@
                                 <svg width="20" height="20">
                                     <use href="/sprite.svg#comment"></use></svg>
                             </div>
-                            <div name="comment-button-count">{{$post->comments_count}}</div>
+                            <div name="comment-button-count">{{$post->comments_all_count}}</div>
 
                         </a>
                         @auth
