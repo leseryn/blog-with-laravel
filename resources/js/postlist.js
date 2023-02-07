@@ -8,7 +8,6 @@ $(window).scroll(function () {
     if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
 
         nextUrl = $('a[rel="next-page"]');
-
         if(nextUrl.length>0){
             nextUrl = nextUrl[0].href;
             console.log(nextUrl);

@@ -89,14 +89,46 @@ console.log(upload);
   for (let i = upload.cachedFileArray.length - 1; i >= 0; i--) {
     formData.append('images[]',upload.cachedFileArray[i]);
   }
- console.log(upload.cachedFileArray.length);
-  console.log([...formData]);
+ // console.log(upload.cachedFileArray.length);
+ //  console.log([...formData]);
 
   let url = formElement.action;
-  console.log(url);
+  // console.log(url);
 
   sendDataForm(url, formData);
   
 });
 
 // 
+let deletebtn = document.getElementById('delete');
+deletebtn.addEventListener('click', () => {
+// console.log(deletebtn.name);
+  let confirmResult = confirm("Want to delete?")
+  if(confirmResult){
+    let postId = deletebtn.name.split('-')[1];
+    let url = '/blog/edit/'+postId+'/delete';
+    
+    deletePost(url);
+  }
+});
+
+async function deletePost(url){
+  try{
+    let response = await fetch(url,{
+      method:'POST',
+      headers:{
+        "X-CSRF-Token": document.querySelector('input[name=_token]').value,},
+      });
+    if(response.status=="200"){
+      alert('successfully deleted...');
+      window.location = '/';
+    }else if(response.status=="403"){
+      alert('no permission');
+      window.location = '/';
+    }
+    window.location = '/';
+
+  }catch(error){
+    console.error(error);
+  }
+}

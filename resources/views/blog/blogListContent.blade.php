@@ -46,7 +46,7 @@
                         @endauth
                       
                     </div>
-                    <small class="text-muted">{{$post->created_at->diffForHumans()}}, {{$post->user->display_name}}</small>
+                    <small class="text-muted">{{$post->created_at->diffForHumans()}}, <a href="/{{$post->user->name}}">{{$post->user->display_name}}</a></small>
                 </div>
             </div>
 

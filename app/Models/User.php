@@ -45,7 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // protected $with = ['likes','follow','followBy'];
+    protected $with = ['follow'];
 
     public function likes(){
         return $this->hasMany(UserLikePost::class, 'user_id');
@@ -59,4 +59,7 @@ class User extends Authenticatable
         return $this->hasMany(UserFollow::class, 'following_user_id');
     }
 
+    public function posts(){
+        return $this->hasMany(BlogPost::class, 'user_id');
+    }
 }

@@ -60,23 +60,21 @@ async function loadPost(postId){
 		        "X-Requested-With": "XMLHttpRequest",},
 		      method: "get",
 		    })
-		let data = await response.json();
-		// console.log(data['view']);
-		let contentDivElement = document.getElementById('post-content');
-		// console.log(contentDivElement);
-		// console.log($('contentDivElement'));
-		console.log('sdfsdfsdff');
-		console.log($('body')[0]);
-		// $($('body')[0]).prepend(data['view']);
-		// console.log();
-		// $(data['view']).css()
-		$(data['view']).insertAfter($($('nav')[0]));
-		$('body').css({"overflow":"hidden"});
-		// $(contentDivElement).append(data['view']);
-		currPostLoad = $('#post-load-'+postId)[0];
-		postLoadOn = true;
-imgCounts = $($('.slideshow-container')[0]).data('image-count');
-showSlides(slideIndex);
+		
+		if(response.status=="200"){
+
+			let data = await response.json();
+			let contentDivElement = document.getElementById('post-content');
+			console.log('sdfsdfsdff');
+			console.log($('body')[0]);
+			$(data['view']).insertAfter($($('nav')[0]));
+			$('body').css({"overflow":"hidden"});
+			currPostLoad = $('#post-load-'+postId)[0];
+			postLoadOn = true;
+			imgCounts = $($('.slideshow-container')[0]).data('image-count');
+			showSlides(slideIndex);
+		}
+		
 	}catch(e){
 		console.error(e);
 	}

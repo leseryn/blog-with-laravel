@@ -32,7 +32,8 @@ use App\Http\Controllers\User\UserRegisterController;
 Route::post('/register', [UserRegisterController::class, 'register'])->name('user-register');
 
 use App\Http\Controllers\User\UserLoginController;
-Route::post('/login', [UserLoginController::class, 'login']);
+Route::get('/login', [UserLoginController::class, 'showLogin']);
+Route::post('/login', [UserLoginController::class, 'login'])->name('/login');
 Route::get('/logout', [UserLoginController::class, 'logout']);
 
 use App\Http\Controllers\User\UserProfileController;
@@ -45,6 +46,8 @@ Route::put('/user/edit/submit', [UserProfileController::class, 'submit'])->middl
 use App\Http\Controllers\Blog\BlogListController;
 //user and the following 
 Route::get('/blog', [BlogListController::class, 'showBlogList']);
+Route::get('/blog/lobby', [BlogListController::class, 'showLobby']);
+
 Route::get('/blog/likes', [BlogListController::class, 'showLikes'])->middleware('auth');
 Route::get('/blog/search', [BlogListController::class, 'showSearch']);
 Route::get('/blog/user', [BlogListController::class, 'showUserPost'])->middleware('auth');
@@ -67,7 +70,8 @@ Route::get('/blog/article/imageslider/{postId}', [BlogPostController::class, 'lo
 use App\Http\Controllers\Blog\BlogEditController;
 Route::get('/blog/edit/{postId}', [BlogEditController::class, 'showBlogEdit'])->middleware('auth');  
 
-Route::put('/blog/edit/{postId}/submit', [BlogEditController::class, 'submit'])->middleware('auth');  
+Route::put('/blog/edit/{postId}/submit', [BlogEditController::class, 'submit'])->middleware('auth'); 
+ Route::post('/blog/edit/{postId}/delete', [BlogEditController::class, 'delete'])->middleware('auth'); 
 
 
 

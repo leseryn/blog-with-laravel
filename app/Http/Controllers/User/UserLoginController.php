@@ -10,26 +10,14 @@ use Hash;
 
 class UserLoginController extends Controller{
 
-    public function __construct()
-    {
-    	
-    	// $this->middleware('guest')->except('logout');
-    }
-
+	protected function showLogin(Request $request){
+		if(Auth::check()){
+			return redirect('/');
+		}
+		return view('/home/home',['message'=>$request->input('message')]);
+	}
 	protected function login(Request $request){
-		// dd('dd');
-		// $data = $request->all();
-		// $validator = Validator::make($data, [
-		// 	'email' => [ 'email']
-		// ]);
 
-		// if($validator->fails()){
-		// 	return redirect('/')->withErrors($validator)->withInput($request->all());
-		// }
-		// $user = User::where('email',$data['email'])->first();
-		// if($user && Hash::check($data['password'], $user['password'])){
-		// 	$request->session()->put('user_id', $user->id);
-		// }
 		$data = $request->except(['_token']);
 	
         $validator =  Validator::make($data, [
@@ -38,7 +26,7 @@ class UserLoginController extends Controller{
     	]);
 
         if($validator->fails()){
-        	return redirect('/')->withErrors($validator)->withInput($request->except(['_token']));
+        	return redirect('/login')->withErrors($validator)->withInput($request->except(['_token']));
         }
 
 		if (Auth::attempt($data)) {
@@ -59,6 +47,6 @@ class UserLoginController extends Controller{
 
     	$request->session()->regenerateToken();
 
-		return redirect('/');
+		return redirect('/login');
 	}
 }

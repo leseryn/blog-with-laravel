@@ -22,6 +22,7 @@ return new class extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
             $table->boolean('published')->default(0);
+            $table->dateTime('deleted_at')->nullable();
         });
     }
 

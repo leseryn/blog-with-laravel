@@ -13,7 +13,7 @@
 
 <nav class="navbar py-0 m-0 navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="/blog">
+      <a class="navbar-brand" href="/">
       	<svg width="40" height="40"><use class="reply-icon" href="/sprite.svg#sloth"></use></svg>
       </a>
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbars">
@@ -32,13 +32,16 @@
 	            <a class="nav-link"  href="/blog/likes">Likes</a>
 	          </li>
 	          <li class="nav-item">
+	            <a class="nav-link"  href="/blog/lobby">Lobby</a>
+	          </li>
+	          <li class="nav-item">
 	            <a class="nav-link"  href="/blog/edit/new">New Post</a>
 	          </li>
 
 
           @else
 	          <li class="nav-item">
-	            <a class="nav-link"  href="/">Login</a>
+	            <a class="nav-link"  href="/login">Login</a>
 	          </li>
           @endauth
           	</ul>

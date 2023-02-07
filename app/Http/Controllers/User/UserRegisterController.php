@@ -24,7 +24,7 @@ class UserRegisterController extends Controller{
 		]);
 		
 		if($validator->fails()){
-			return redirect('/')->withErrors($validator)->withInput($request->all());
+			return redirect('/login')->withErrors($validator)->withInput($request->all());
 		}
 
 		User::create([
@@ -33,7 +33,7 @@ class UserRegisterController extends Controller{
 			'email' => $data['email'],
 			'password' =>Hash::make($data['password'])
 		]);
-		return redirect()->route('/',['message'=>'successfully registered, login now!']);
+		return redirect()->route('/login',['message'=>'successfully registered, login now!']);
 	}
 
 }

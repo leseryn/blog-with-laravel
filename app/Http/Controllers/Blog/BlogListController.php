@@ -10,24 +10,44 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class BlogListController extends Controller{
 
-	var $showPosts = 5;
+	var $showPosts = 20;
 
-	protected function showBlogList(Request $request){
+	protected function showLobby(Request $request){
 
-		if(Auth::check()){
+		return $this->showBlogList($request, false);
+
+	}
+
+	public function showBlogList(Request $request, $followOnly=true){
+		$login = Auth::check();
+
+		// if login show the following blog posts
+		if($followOnly && $login){
 			$userId = Auth::user()->id;
+			$userfollow = Auth::user()->follow()->get('following_user_id')->toArray();
+			array_push($userfollow,$userId);
 			$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
 					->withCount('likes')
 					->withCount('comments')
-					->with(['user:id,display_name',])
+					->with(['user:id,display_name,name',])
+					->whereIn('user_id',$userfollow)
 					->where('published','=',1)
 					->orderBy('created_at', 'desc')
 					->paginate($this->showPosts);
-
-		}
-		else{
-			
-			$posts = BlogPost::with(['user:id,display_name',])
+		
+		}elseif($login){
+			$userId = Auth::user()->id;
+			$userfollow = Auth::user()->follow()->get('following_user_id')->toArray();
+			$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
+					->withCount('likes')
+					->withCount('comments')
+					->with(['user:id,display_name,name',])
+					->where('published','=',1)
+					->orderBy('created_at', 'desc')
+					->paginate($this->showPosts);
+		
+		}else{
+			$posts = BlogPost::with(['user:id,display_name,name',])
 					->withCount('likes')
 					->withCount('comments')
 					->where('published','=',1)
