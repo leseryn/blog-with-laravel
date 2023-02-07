@@ -17,9 +17,7 @@
             @else
                 <a href="/blog/article/{{$id}}" id="exit" name="exit" class="btn">exit</a>
                 <a id="delete" name="delete-{{$id}}" class="btn">delete</a>
-<!--                 <form action="/blog/edit/{{$id}}/delete" method="post">
-                    @csrf<button type="submit">ddd</button>
-                </form> -->
+
             @endif
         </div>
     	<div class="row">
@@ -39,7 +37,7 @@
     		<textarea  class="form-control" name="content"  rows="15" style="width: 100%" >{{$content}}</textarea>
 
             <!-- <input type="file" class="form-control" name="images[]" multiple/> -->
-             <button type="submit" name="save" class="btn">save</button>
+             <!-- <button type="submit" name="save" class="btn">save</button> -->
              <div class="custom-file-container" data-upload-id="myUniqueUploadId"></div>
     
     		</form>
@@ -56,5 +54,3 @@
     @endforeach
 @endif
 
-
-<!-- <button  id="btn">Click Me!</button> -->

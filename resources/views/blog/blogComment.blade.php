@@ -21,13 +21,7 @@
 
 
             </div>
-<!-- <form  action="/blog/article/{{$post->id}}/comment"  method="post">
-    @csrf 
-    {{method_field('put')}} 
-    <textarea class="form-control" name="comment"></textarea>
-    <button type="submit" class="btn m-1">send</button>
 
-</form> -->
             <div class="comment-div main-comment"> 
 
                 @if($hasMorePages)

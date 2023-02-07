@@ -10,10 +10,7 @@
                 <p class="card-text">{{ $post->title }}{{$post->summary}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-<!-- <form action="/blog/article/4/cancel-like " method="post">
-    @csrf
-    <button type="submit">fff</button>
-</form>   -->           @if($post->user_like)
+        @if($post->user_like)
                             <a type="button" class="btn btn-sm btn-outline-secondary" name="like-button-cancel" style=' display: flex;'>
                             <div>
                                 <svg width="20" height="20">

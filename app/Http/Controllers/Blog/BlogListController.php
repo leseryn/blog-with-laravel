@@ -95,31 +95,58 @@ class BlogListController extends Controller{
 	protected function showSearch(Request $request){
 
 		$search = $request->q;
+		
+		if($search[0]=="@"){
+			$search = ltrim($search,'@');
+			if(Auth::check()){
+				$userId = Auth::user()->id;
+				$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
+						->with(['user:id,display_name',])
+						->withCount('likes')
+						->withCount('commentsAll')
+						->where('published','=',1)
+						->whereRelation('user','name','like','%'.$search.'%')
+						->orderBy('created_at', 'desc')
+						->paginate($this->showPosts);
+			}
+			else{
+				$posts = BlogPost::with(['user:id,name',])
+						->withCount('likes')
+						->withCount('commentsAll')
+						->where('published','=',1)
+						->whereRelation('user','name','like','%'.$search.'%')
+						->orderBy('created_at', 'desc')
+						->paginate($this->showPosts);
+			}
+			// dd($posts);
+		}else{
+			if(Auth::check()){
+				$userId = Auth::user()->id;
+				$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
+						->with(['user:id,display_name',])
+						->withCount('likes')
+						->withCount('commentsAll')
+						->where('published','=',1)
+						->where('title','like','%'.$search.'%')
+						->orWhere('summary','like','%'.$search.'%')
+						->orWhere('content','like','%'.$search.'%')
+						->orderBy('created_at', 'desc')
+						->paginate($this->showPosts);
+			}
+			else{
+				$posts = BlogPost::with(['user:id,name',])
+						->withCount('likes')
+						->withCount('commentsAll')
+						->where('published','=',1)
+						->where('title','like','%'.$search.'%')
+						->orWhere('summary','like','%'.$search.'%')
+						->orWhere('content','like','%'.$search.'%')
+						->orderBy('created_at', 'desc')
+						->paginate($this->showPosts);
+			}
 
-		if(Auth::check()){
-			$userId = Auth::user()->id;
-			$posts = BlogPost::addSelect(['user_like'=>UserLikePost::select('user_id')->where('user_id',$userId)->whereColumn('post_id','blog_post.id')])
-					->with(['user:id,display_name',])
-					->withCount('likes')
-					->withCount('commentsAll')
-					->where('published','=',1)
-					->where('title','like','%'.$search.'%')
-					->orWhere('summary','like','%'.$search.'%')
-					->orWhere('content','like','%'.$search.'%')
-					->orderBy('created_at', 'desc')
-					->paginate($this->showPosts);
 		}
-		else{
-			$posts = BlogPost::with(['user:id,name',])
-					->withCount('likes')
-					->withCount('commentsAll')
-					->where('published','=',1)
-					->where('title','like','%'.$search.'%')
-					->orWhere('summary','like','%'.$search.'%')
-					->orWhere('content','like','%'.$search.'%')
-					->orderBy('created_at', 'desc')
-					->paginate($this->showPosts);
-		}
+
 
 		if($request->ajax()){
 

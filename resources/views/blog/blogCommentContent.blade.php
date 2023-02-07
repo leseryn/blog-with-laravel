@@ -1,6 +1,5 @@
 <div class="comment" id="comment-{{$comment->id}}">
-    <!--     <a href="#comment-1" class="comment-border-link">
-        </a> -->
+
 
     <div class="comment-heading">
         <img class="comment-user-img" src="{{asset($comment->user->profile_image_path)}}" >

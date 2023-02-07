@@ -29,7 +29,7 @@ class UserRegisterController extends Controller{
 
 		User::create([
 			'name' =>$data['name'],
-			'display_name'=>'sloth_'.uniqid(),
+			'display_name'=>uniqid('sloth_'),
 			'email' => $data['email'],
 			'password' =>Hash::make($data['password'])
 		]);
