@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blog_post', function (Blueprint $table) {
+        Schema::create('user_follow', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('title', 100)->nullable();
-            $table->text('summary')->nullable();
-            $table->text('content')->nullable();
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
-            $table->boolean('published')->default(0);
+            $table->integer('following_user_id');
             $table->dateTime('deleted_at')->nullable();
-        });
+        }); 
+          
     }
 
     /**
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_post');
+        Schema::dropIfExists('user_follow');
     }
 };

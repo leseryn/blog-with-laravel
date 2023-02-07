@@ -1,6 +1,6 @@
 import $ from "jquery";
 import './likepost.js';
-
+import './postlist_loadpost';
 var nextUrl = '/';
 
 
@@ -8,7 +8,6 @@ $(window).scroll(function () {
     if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
 
         nextUrl = $('a[rel="next-page"]');
-
         if(nextUrl.length>0){
             nextUrl = nextUrl[0].href;
             console.log(nextUrl);
@@ -36,6 +35,7 @@ function infinteLoadMore(url) {
             //     $('.auto-load').html("We don't have more data to display :(");
             //     return;
             // }
+            // console.log(typeof(response));
             $('.auto-load').hide();
             $("#post-content").append(response);
         })

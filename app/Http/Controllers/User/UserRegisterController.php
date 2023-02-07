@@ -18,21 +18,22 @@ class UserRegisterController extends Controller{
 
 		$data = $request->all();
 		$validator = Validator::make($data, [
-			'name' =>['required'],
+			'name' =>['required','unique:users','min:4','max:16','alpha_dash:ascii'],
 			'email' => ['required','unique:users', 'email'],
-			'password' =>['required','min:6','max:12']
+			'password' =>['required','min:6','max:16']
 		]);
 		
 		if($validator->fails()){
-			return redirect('/')->withErrors($validator)->withInput($request->all());
+			return redirect('/login')->withErrors($validator)->withInput($request->all());
 		}
 
 		User::create([
 			'name' =>$data['name'],
+			'display_name'=>uniqid('sloth_'),
 			'email' => $data['email'],
 			'password' =>Hash::make($data['password'])
 		]);
-		return redirect()->route('/',['message'=>'successfully registered, login now!']);
+		return redirect()->route('/login',['message'=>'successfully registered, login now!']);
 	}
 
 }

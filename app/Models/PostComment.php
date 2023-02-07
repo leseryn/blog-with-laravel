@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class PostComment extends Model
 {
-
+    use SoftDeletes;
+    
     protected $table = 'post_comment';
 
     protected $primaryKey = 'id';
@@ -19,7 +20,7 @@ class PostComment extends Model
         'created_at',
     ];
 
-    protected $with = ['user:id,name,profile_image_path','childComment'];
+    // protected $with = ['user:id,name,display_name,profile_image_path','childComment'];
 
     // public function post()
     // {
@@ -31,8 +32,13 @@ class PostComment extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function post()
+    {
+        return $this->belongsTo(BlogPost::class,'post_id');
+    }
 
-    public function childComment()
+
+    public function childComments()
     {
         return $this->hasMany(PostComment::class,'parent_id')->orderBy('created_at','asc');
         // return $this->hasMany(PostComment::class,'parent_id')->where('parent_id','=',null);

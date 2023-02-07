@@ -11,20 +11,16 @@ use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rule;
 class UserProfileController extends Controller
 {
-    protected function showProfile(Request $request){
-        $userInfo = Auth::user();
-        $binding = [
-            'name'=>$userInfo->name,
-            'intro'=>$userInfo->profile_text,
-            'image'=>$userInfo->profile_image_path,
-        ];
+    // protected function showProfile(Request $request){
+    //     $userInfo = Auth::user();
+    //     $binding = [
+    //         'name'=>$userInfo->display_name,
+    //         'intro'=>$userInfo->profile_text,
+    //         'image'=>$userInfo->profile_image_path,
+    //     ];
 
-        // if($request->ajax()){
-        //     return view('/user/userProfileEditContent', $binding);
-        // }
-        // return $request->header();
-        return view('/user/userProfile',$binding);
-    }
+    //     return view('/user/userProfile',$binding);
+    // }
 
     protected function showEdit(){
 
@@ -34,7 +30,7 @@ class UserProfileController extends Controller
 
         $userInfo = Auth::user();
         $binding = [
-            'name'=>$userInfo->name,
+            'name'=>$userInfo->display_name,
             'intro'=>$userInfo->profile_text,
             'image'=>$userInfo->profile_image_path,
         ];
@@ -51,6 +47,7 @@ class UserProfileController extends Controller
 
         //validate
         $validator = Validator::make($data, [
+                    'display_name' =>['nullable','max:16'],
                     'image' =>[
                         'nullable',
                         File::image()
@@ -78,6 +75,7 @@ class UserProfileController extends Controller
 
         //update profile
         $updateData = [
+            'display_name'=>$data['display_name'],
             'profile_text'=>$data['text'],
         ];
         if(isset($data['image'])){
@@ -86,6 +84,6 @@ class UserProfileController extends Controller
         }
         User::where('id',Auth::user()->id)->update($updateData);
 
-        return response()->json("/user", 200);
+        return response()->json("/".Auth::user()->name, 200);
     }
 }

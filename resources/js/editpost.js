@@ -20,6 +20,40 @@ for (let i = oldImages.length - 1; i >= 0; i--) {
     oldImages[i].dataset.imagepath);
 }
 
+
+document.body.addEventListener("click",(e)=>{
+
+  // console.log(e.target.closest('.btn'));
+  let btn = e.target.closest('.btn');
+  console.log(btn);
+  if(btn && btn.id==="delete"){
+    let confirmResult = confirm("Want to delete?")
+    if(confirmResult){
+      let postId = btn.name.split('-')[1];
+      let url = '/blog/edit/'+postId+'/delete';
+      
+      deletePost(url);
+    }
+  }
+  if(btn && btn.id==="savepost"){
+    // console.log(upload);
+    let formElement = document.getElementById('blogpost');
+    let formData = new FormData(formElement);
+    for (let i = upload.cachedFileArray.length - 1; i >= 0; i--) {
+      formData.append('images[]',upload.cachedFileArray[i]);
+    }
+   // console.log(upload.cachedFileArray.length);
+   //  console.log([...formData]);
+
+    let url = formElement.action;
+    // console.log(url);
+
+    sendDataForm(url, formData);
+  }
+
+
+});
+
 async function addPresetFiles(filename,path) {
       try {
         let defaultType = 'image/jpeg';
@@ -40,7 +74,7 @@ async function addPresetFiles(filename,path) {
   }
 
 
-let savepostbtn = document.getElementById('savepost');
+
 async function sendDataForm(url, formData){
   try{
 
@@ -82,21 +116,24 @@ async function sendDataForm(url, formData){
   }
 }
 
-savepostbtn.addEventListener('click', () => {
-console.log(upload);
-  let formElement = document.getElementById('blogpost');
-  let formData = new FormData(formElement);
-  for (let i = upload.cachedFileArray.length - 1; i >= 0; i--) {
-    formData.append('images[]',upload.cachedFileArray[i]);
+
+async function deletePost(url){
+  try{
+    let response = await fetch(url,{
+      method:'POST',
+      headers:{
+        "X-CSRF-Token": document.querySelector('input[name=_token]').value,},
+      });
+    if(response.status=="200"){
+      alert('successfully deleted...');
+      window.location = '/';
+    }else if(response.status=="403"){
+      alert('no permission');
+      window.location = '/';
+    }
+    window.location = '/';
+
+  }catch(error){
+    console.error(error);
   }
- console.log(upload.cachedFileArray.length);
-  console.log([...formData]);
-
-  let url = formElement.action;
-  console.log(url);
-
-  sendDataForm(url, formData);
-  
-});
-
-// 
+}

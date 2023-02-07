@@ -11,11 +11,13 @@
     @endif
 
     <div class=" py-3">
-        <div class="position-relative">
+        <div class="d-flex justify-content-end" >
             @if($id==='new')
-                <a  href="/blog" id="exit" name="exit" class="btn position-absolute top-50 end-0 translate-middle-y">exit</a>
+                <a  href="/blog" id="exit" name="exit" class="btn">exit</a>
             @else
-                <a  href="/blog/article/{{$id}}" id="exit" name="exit" class="btn position-absolute top-50 end-0 translate-middle-y">exit</a>
+                <a href="/blog/article/{{$id}}" id="exit" name="exit" class="btn">exit</a>
+                <a id="delete" name="delete-{{$id}}" class="btn">delete</a>
+
             @endif
         </div>
     	<div class="row">
@@ -52,5 +54,3 @@
     @endforeach
 @endif
 
-
-<!-- <button  id="btn">Click Me!</button> -->

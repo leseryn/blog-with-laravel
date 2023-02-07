@@ -1,49 +1,48 @@
 <div class="comment" id="comment-{{$comment->id}}">
-        <a href="#comment-1" class="comment-border-link">
-        </a>
+
 
     <div class="comment-heading">
         <img class="comment-user-img" src="{{asset($comment->user->profile_image_path)}}" >
-        <div class="comment-info">
-            <a href="#" class="comment-user">{{$comment->user->name}}</a>
+        <div class="comment-info flex-grow-1">
+            <a href="{{url('/'.$comment->user->name)}}" class="comment-user">{{$comment->user->display_name}}</a>
             <p class="comment-time">{{$comment->created_at}}</p>
         </div>
+
+        @if($authId===$comment->user_id || $deletePermission)
+        <div class="align-self-start btn" name="delete-comment">X</div>
+        @endif
 
     </div>
 
     <div class="comment-body">
-        <p class="text">{{$comment->comment}}</p>
-        <ul class="list-inline">
-
-            <li class="list-inline-item px-2">
-                <a name="reply-comment" href="#comment-{{$comment->id}}" >
-                    <svg width="20" height="20"><use class="reply-icon" href="/sprite.svg#reply-icon"></use></svg>
-                </a>
-            </li>
-      <!--  <li class="list-inline-item">
-                <a >
-                    <svg width="20" height="20"><use class="like-icon" href="/sprite.svg#heart-icon"></use></svg>  
-                </a>
-            </li> -->
-        </ul>
-        <div id="comment-{{$comment->id}}-reply" style="display:none">
-            <form action="/blog/article/{{$post->id}}/comment/{{$comment->id}}"  method="post">
-                @csrf 
-                {{method_field('put')}} 
-                <textarea class="form-control" name="comment"></textarea>
-                <button class="btn m-2">send</button>
-            </form>
+        <div class="">
+            <x-markdown >
+                {{$comment->comment}}
+            </x-markdown>
         </div>
+        <ul class="list-inline">
+            <li class="list-inline-item px-2" name="reply-icon">
 
+                    <svg width="20" height="20"><use  href="/sprite.svg#reply-icon"></use></svg>
+
+            </li>
+        </ul>
     </div>
 
-    <div class="replies">
-        @foreach($comment->childComment as $comment)
+    @if (is_null($comment->parent_id))
+    <div class="comment-div replies">
 
-            @include('blog.blogCommentReplyContent')
+            @if($comment->childComments()->exists())
 
-        @endforeach 
+                <div class="d-flex justify-content-end">
+                    <div class="comment-hide"  name="hide" style="display: none;">hide</div>
+                    <div class="comment-load">more...</div>
+                </div>
+
+            @endif
     </div>
+    @endif
+
 </div>
 
 

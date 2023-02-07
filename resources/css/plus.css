@@ -1,47 +1,123 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+/*    picture slider    */
+.fullscreen-container {
 
-/*body {
-    background-color: #F4F4F4 !important
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(90, 90, 90, 0.5);
+  z-index: 9999;
 }
-*/
-
-
-/*.card {
-    border: none;
-    border-radius: 20px;
-    padding: 10px;
-    margin-bottom: 40px
-}*/
-
-/*img {
-    border-radius: 10px;
-}*/
-
-img:hover {
-    cursor: pointer
+.post-load{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(90, 90, 90, 0.5);
+  z-index: 9999;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-/*.video-player {
-  width: 10rem;
-  height: 10rem;
+
+div.scroll {
+  max-height: 90vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Slideshow container */
+.slideshow-container {
   position: relative;
-}*/
-/*video {
-  max-width: 10rem;
-  max-width: 10rem;
-  background:black;
-}*/
+  margin:0 auto;
+/*  background-color:#f8f9f9;*/
+  background-color:#000;
+/*  border-radius: 0.5em;*/
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.slides {
+/*  padding:0.5em;*/
+}
+.slides img{
+/*  width: 100%;*/
+  max-width:100%;
+  max-height:40em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+.slideshow-btn-area{
+/*    position: absolute;*/
+    
+
+}
+.slideshow-prev, .slideshow-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    color: white;
+    padding: 0.5em;
+    transform:translateY(-1em);
+    border-radius: 0.5em;
+    font-size: 18px;
+    transition: 0.6s ease;
+    text-decoration: none;
+    opacity:40%;
+
+}
+
+.slideshow-next {
+    right: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.slideshow-prev:hover, .slideshow-next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
 
 
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
 
+
+/*    comment    */
 .comment {
-    background: #F4F4F4;
+    background: #f4f4f4;
     border-radius: 0.5em;
     position: relative;
     border: none;
     margin: 0.5em;
     padding: 0.3em;
 }
+.comment-text{
+    background: #eae9e9;
+    border-radius: 0.5em;
+    position: relative;
+    border: none;
+    margin: 0.5em;
+    padding: 0.3em;
 
+}
+
+.replies .comment {
+    background: #eae9e9;
+    margin: 0.5em;
+    padding: 0.3em;
+}
+.replies{
+    background: #eae9e9;
+    margin: 0.5em;
+    border-radius: 0.5em;
+}
 .comment-heading {
     display: flex;
     color: #888;
@@ -49,10 +125,6 @@ img:hover {
     font-size: small;
 }
 
-.comment-user-img {
-    width: 100%;
-    width:5em;
-}
 
 .comment-user {
     color: #5C5C5C;
@@ -75,7 +147,7 @@ img:hover {
 }
 
 .comment-body {
-    padding: 1em;
+/*    padding: 1em;*/
     padding-left: 2em;
 }
 
@@ -89,18 +161,24 @@ p.text {
 .comment-border-link {
     display: block;
     position: absolute;
-    top: 6em;
+    top: 4.5em;
     left: 0.5em;
     width: 0.7em;
-    height: calc(100% - 100px);
+    height: calc(100% - 80px);
     border-left: 0.5em solid transparent;
     border-right: 0em solid transparent;
     background-color: #CCC;
     background-clip: padding-box;
 }
 
-
-.replies {
-    margin-left: 1em;
+.comment-load, .comment-hide{
+    color: #555;
+    text-align: right;
+    padding-right:1em;
+}
+.comment-load:hover, .comment-hide:hover {
+    cursor: pointer;
+    color: #988;
+    text-decoration: underline;
 }
 

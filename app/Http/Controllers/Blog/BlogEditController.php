@@ -26,9 +26,11 @@ class BlogEditController extends Controller{
 			];
 		}else{
 			
-			$currPost = BlogPost::with('author:id,name')
+			$currPost = BlogPost::with('user:id,name')
 					->where('id','=',$postId)->first();
-
+			if (!$currPost){
+				return redirect()->route('/');
+			}
 			
 
 			$post = [
@@ -43,6 +45,13 @@ class BlogEditController extends Controller{
 
 		return view('/blog/blogEdit', $post);
 
+	}
+
+	protected function delete(Request $request,$postId){
+		$currPost = BlogPost::where('id',$postId)->first();;
+		Gate::authorize('delete-post', $currPost);
+		$currPost->delete();
+		return response()->json('deleted...', 200);
 	}
 
 
@@ -72,13 +81,15 @@ class BlogEditController extends Controller{
 		// create new blog_post data
 		if($postId==='new'){
 			Gate::authorize('create-post');
-			$updateData['author_id']=Auth::user()->id;
+			$updateData['user_id']=Auth::user()->id;
 			$postId = BlogPost::create($updateData)->id;
 			
 		}else{
 		// update blog_post data
 			$currPost = BlogPost::where('id',$postId)->first();
+
 			Gate::authorize('update-post', $currPost);
+			
 			$currPost->update($updateData);
 		}
 

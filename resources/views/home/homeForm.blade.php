@@ -21,7 +21,9 @@
 @endif
 
 
-
+<div class="row text-center">
+<p ><svg width="22" height="22"><use href="/sprite.svg#sloth-2"></use></svg>This is a practice project.</p>
+</div>
 
 
 <div class="container mt-5">
