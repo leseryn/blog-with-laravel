@@ -35,7 +35,7 @@ $("body").on("click","a", function(){
 
 	if(targetId=="edit-profile"){
 		if($('#edit-profile-div').length){
-			console.log($('#edit-profile-div'));
+			// console.log($('#edit-profile-div'));
 			$('#edit-profile-div').toggle("normal");
 		}else{
 			showEditProfile();
@@ -43,13 +43,13 @@ $("body").on("click","a", function(){
 
 
 	}else if(targetId=="exit-edit"){
-		console.log($("#profile-image-upload"));
+		// console.log($("#profile-image-upload"));
 		$('#edit-profile-div').toggle("slide");
 		// $('#edit-profile-div').remove();
 
 
 	}else if(targetId=="save-profile" ){
-		console.log(cacheFile);
+		// console.log(cacheFile);
 		let formElement = document.getElementById("profile-edit-form");
 		let formData = new FormData(formElement);
 		formData.delete('image');
@@ -63,11 +63,11 @@ $("body").on("click","a", function(){
 	}else if(targetId=="following" ){
 		// console.log($(this)[0].name);
 		let target =$(this)[0].querySelector('use');
-		console.log(target.href.baseVal);
+		// console.log(target.href.baseVal);
 		let targetStatus =target.href.baseVal;
 		// console.log($targetStatus);
 		targetStatus=targetStatus.split('#')[1];
-		console.log(targetStatus);
+		// console.log(targetStatus);
 		if(targetStatus=="follow"){
 			follow('follow','unfollow',target);
 		}else{
@@ -94,7 +94,7 @@ async function follow(status, nextstatus,target){
 		let token = document.querySelector('input[name=_token]');
 		if(!token){return;}
 		let url = window.location.href + '/' + status;
-		console.log(url)
+		// console.log(url)
 		let response = await fetch(url,{
 			method:'post',
 		    headers:{
@@ -123,7 +123,7 @@ async function sendDataForm(url, formData){
       headers:{
         "X-CSRF-Token": document.querySelector('input[name=_token]').value,},
       body:formData,});
-console.log(response.status);
+// console.log(response.status);
       if(response.status === 200) {
         let data = await response.json();
         // console.log(data);
@@ -134,7 +134,7 @@ console.log(response.status);
 
       if(response.status === 422) {
         let data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         // remove inserted alert
         document.querySelectorAll("[class*=alert]").forEach(el => el.remove());
@@ -168,7 +168,7 @@ async function showEditProfile(){
 			method:'GET',
 			'X-Requested-With': 'XMLHttpRequest'
 		});
-		console.log(response.status);
+		// console.log(response.status);
 		if(response.status=='200'){
 			let data = await response.text();
 			$('#user-profile-content').append(data);

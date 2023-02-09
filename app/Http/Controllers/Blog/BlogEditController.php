@@ -50,6 +50,11 @@ class BlogEditController extends Controller{
 	protected function delete(Request $request,$postId){
 		$currPost = BlogPost::where('id',$postId)->first();;
 		Gate::authorize('delete-post', $currPost);
+		$images = $currPost->images()->get();
+		foreach($images as $image){
+			Storage::disk('images_post')->delete($image->filename);
+			$image->delete();
+		}
 		$currPost->delete();
 		return response()->json('deleted...', 200);
 	}
