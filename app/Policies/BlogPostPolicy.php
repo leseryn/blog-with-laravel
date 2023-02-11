@@ -73,10 +73,11 @@ class BlogPostPolicy
      */
     public function delete(User $user, BlogPost $blogPost)
     {
-        //
-        return $user->id === $blogPost->user_id
-                ? Response::allow()
-                : Response::deny('permission denied');
+        if($user->role==="admin" || $user->id === $blogPost->user_id){
+            return Response::allow();
+        }else{
+            Response::deny('permission denied');
+        }
     }
 
     /**
