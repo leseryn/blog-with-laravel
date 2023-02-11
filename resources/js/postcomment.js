@@ -5,12 +5,12 @@ import $ from'jquery';
 let lastReplyElement;
 let commentTextTemplateElement = $('div.comment-text')[0].cloneNode(true);
 commentTextTemplateElement.id='curr';
-console.log(commentTextTemplateElement);
+// console.log(commentTextTemplateElement);
 document.body.addEventListener("keypress",(e)=>{
 	if (e.code === 'Enter'&& !e.shiftKey){
 		let btnElement = $(e.target).parents('.comment-text')[0];
 		btnElement = $(btnElement).find('.btn.m-1')[0];
-		console.log(btnElement);
+		// console.log(btnElement);
 		submitComment(btnElement);
 	}
 });
@@ -40,7 +40,7 @@ document.body.addEventListener("click",(e)=>{
 		let hideLinkElement = e.target;
 		let hideElement = $(hideLinkElement).parent()[0];
 		hideElement = $(hideElement).siblings();
-		console.log($(hideLinkElement).attr('name'));
+		// console.log($(hideLinkElement).attr('name'));
 		if($(hideLinkElement).attr('name')=="hide"){
 			$(hideElement).hide();
 			$(hideLinkElement).attr('name','show');
@@ -159,7 +159,7 @@ async function submitComment(btnElement){
 			let textarea = $(currCommentTextElement).find('textarea')[0];
 			$(textarea).val('');
 			$(parentCommentDivElement).append(data['view']);
-			console.log(parentCommentDivElement)
+			// console.log(parentCommentDivElement)
 			location.hash = 'comment-'+data['commentId'];
 		}else{
 			let err = await response.json();

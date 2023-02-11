@@ -10,9 +10,8 @@
 </head>
 
 <body>
-
-<nav class="navbar py-0 m-0 navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <div class="container-fluid">
       <a class="navbar-brand" href="/">
       	<svg width="40" height="40"><use class="reply-icon" href="/sprite.svg#sloth"></use></svg>
       </a>
@@ -20,7 +19,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="navbar-collapse collapse" id="navbars" style="">
+      <div class="collapse navbar-collapse" id="navbars">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           
 <!--           <li class="nav-item">
@@ -45,9 +44,7 @@
 	          </li>
           @endauth
           	</ul>
-
- 
-           <form action="/blog/search" id="search-form" class="mb-2 mb-lg-0" method="get" style="display: none;">
+        <form action="/blog/search" id="search-form" class="mb-2 mb-lg-0" method="get" style="display: none;">
           <input id="search-text" class="form-control" type="text" placeholder="Search" aria-label="Search" name="q">
         </form>
         <svg id="search-icon" class="mx-2 mb-lg-0" width="30" height="30"><use class="reply-icon" href="/sprite.svg#search"></use></svg>
@@ -67,15 +64,10 @@
 				</div>
 
         @endauth
-
-        
-
-        
-
       </div>
-
     </div>
-</nav>
+  </nav>
+
 
 
 	<div class="container-fuild p-3">

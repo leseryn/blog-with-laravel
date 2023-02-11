@@ -45,7 +45,7 @@ document.body.addEventListener("click",(e)=>{
 }
 });
 function showSlides(slideIndex) {
-  console.log(slideIndex);console.log('slideIndex');
+  // console.log(slideIndex);
   let slides = $('.slides');
   $(slides).hide();
   $(slides[slideIndex]).show();
@@ -65,8 +65,8 @@ async function loadPost(postId){
 
 			let data = await response.json();
 			let contentDivElement = document.getElementById('post-content');
-			console.log('sdfsdfsdff');
-			console.log($('body')[0]);
+			// console.log('sdfsdfsdff');
+			// console.log($('body')[0]);
 			$(data['view']).insertAfter($($('nav')[0]));
 			$('body').css({"overflow":"hidden"});
 			currPostLoad = $('#post-load-'+postId)[0];

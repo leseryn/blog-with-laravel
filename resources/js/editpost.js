@@ -25,7 +25,7 @@ document.body.addEventListener("click",(e)=>{
 
   // console.log(e.target.closest('.btn'));
   let btn = e.target.closest('.btn');
-  console.log(btn);
+  // console.log(btn);
   if(btn && btn.id==="delete"){
     let confirmResult = confirm("Want to delete?")
     if(confirmResult){
