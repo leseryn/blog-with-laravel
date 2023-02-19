@@ -44,9 +44,13 @@
 	          </li>
           @endauth
           	</ul>
-        <form action="/blog/search" id="search-form" class="mb-2 mb-lg-0" method="get" style="display: none;">
+<div class="searchdrop">
+	<div>
+        <form action="/blog/search" id="search-form" class="mb-2 mb-lg-0" method="get" style="display: none;" autocomplete="off">
           <input id="search-text" class="form-control" type="text" placeholder="Search" aria-label="Search" name="q">
         </form>
+   </div>
+</div>
         <svg id="search-icon" class="mx-2 mb-lg-0" width="30" height="30"><use class="reply-icon" href="/sprite.svg#search"></use></svg>
         
 

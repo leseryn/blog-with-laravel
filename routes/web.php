@@ -49,11 +49,16 @@ Route::get('/blog', [BlogListController::class, 'showBlogList']);
 Route::get('/blog/lobby', [BlogListController::class, 'showLobby']);
 
 Route::get('/blog/likes', [BlogListController::class, 'showLikes'])->middleware('auth');
-Route::get('/blog/search', [BlogListController::class, 'showSearch']);
 Route::get('/blog/user', [BlogListController::class, 'showUserPost'])->middleware('auth');
 
 //user post page with profile
 Route::get('/{authorName}',[BlogListController::class, 'showUserPost']);
+
+//blog nav search
+Route::get('/blog/search', [BlogListController::class, 'showSearch']);
+use App\Http\Controllers\Blog\BlogNavSearchController;
+Route::get('/blog/search/searchMatch', [BlogNavSearchController::class, 'searchMatch']);
+
 
 
 use App\Http\Controllers\User\UserFollowController;
